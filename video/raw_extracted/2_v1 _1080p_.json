@@ -1,0 +1,162 @@
+{
+  "source_name": "2_v1 (1080p)",
+  "source_type": "video",
+  "pages": [
+    {
+      "timestamp_s": 0.2,
+      "end_s": 4.1,
+      "text": "بسم الله. What is agile؟ ما هي الإدارة"
+    },
+    {
+      "timestamp_s": 4.9,
+      "end_s": 5.6,
+      "text": "الرشيقة؟"
+    },
+    {
+      "timestamp_s": 8.6,
+      "end_s": 12.5,
+      "text": "Agile بدون كثير"
+    },
+    {
+      "timestamp_s": 13.5,
+      "end_s": 14.3,
+      "text": "من الكلام، هل هو"
+    },
+    {
+      "timestamp_s": 15.5,
+      "end_s": 17.1,
+      "text": "الشكل رقم 1 هذا؟"
+    },
+    {
+      "timestamp_s": 18.7,
+      "end_s": 19.6,
+      "text": "أم الشكل رقم"
+    },
+    {
+      "timestamp_s": 20.6,
+      "end_s": 21.2,
+      "text": "2 هذا؟"
+    },
+    {
+      "timestamp_s": 22.1,
+      "end_s": 25.9,
+      "text": "فكر معي، أي واحد؟ هل"
+    },
+    {
+      "timestamp_s": 26.4,
+      "end_s": 26.4,
+      "text": "أعمل"
+    },
+    {
+      "timestamp_s": 27.9,
+      "end_s": 31.8,
+      "text": "وأسلم المنتج كله مرة واحدة في النهاية؟"
+    },
+    {
+      "timestamp_s": 32.8,
+      "end_s": 36.4,
+      "text": "أم أعمل على أجزاء incrementally؟"
+    },
+    {
+      "timestamp_s": 36.4,
+      "end_s": 37.1,
+      "text": "طبعًا"
+    },
+    {
+      "timestamp_s": 38.6,
+      "end_s": 42.0,
+      "text": "سمعك الذي يقول لي: \"أكيد هو رقم 1\"."
+    },
+    {
+      "timestamp_s": 42.4,
+      "end_s": 46.4,
+      "text": "طبعًا incrementally. ما الذي يركز عليه Agile؟ أنني"
+    },
+    {
+      "timestamp_s": 46.4,
+      "end_s": 50.4,
+      "text": "لا أسلم المنتج كله مرة واحدة. أعمل في sprints"
+    },
+    {
+      "timestamp_s": 50.4,
+      "end_s": 54.0,
+      "text": "مثل هذا، Sprint رقم 1 وSprint رقم"
+    },
+    {
+      "timestamp_s": 54.4,
+      "end_s": 58.1,
+      "text": "2. كل sprint يكون time box، معناها"
+    },
+    {
+      "timestamp_s": 58.3,
+      "end_s": 62.1,
+      "text": "لفترة زمنية معينة تتراوح من أسبوع إلى 4"
+    },
+    {
+      "timestamp_s": 62.2,
+      "end_s": 65.9,
+      "text": "أسابيع. كل cycle من هذه أعمل فيها كل شيء،"
+    },
+    {
+      "timestamp_s": 66.1,
+      "end_s": 69.9,
+      "text": "أحلل وأصمم وأبرمج واختبر وأراجع وأطلق"
+    },
+    {
+      "timestamp_s": 70.0,
+      "end_s": 71.7,
+      "text": "جزءًا صغيرًا من المنتج،"
+    },
+    {
+      "timestamp_s": 73.5,
+      "end_s": 77.3,
+      "text": "وأقدمه للعميل، آخذ ال-feedback وأعود أطور وأحسن مع"
+    },
+    {
+      "timestamp_s": 77.4,
+      "end_s": 80.5,
+      "text": "الوقت في تكرارات بعد ذلك. هذا هو"
+    },
+    {
+      "timestamp_s": 81.0,
+      "end_s": 81.6,
+      "text": "Agile."
+    },
+    {
+      "timestamp_s": 83.0,
+      "end_s": 86.4,
+      "text": "أركز على بناء المنتج على مراحل وفترات زمنية"
+    },
+    {
+      "timestamp_s": 86.5,
+      "end_s": 90.1,
+      "text": "قصيرة بدلاً من أن أسلم المنتج كله"
+    },
+    {
+      "timestamp_s": 90.2,
+      "end_s": 93.8,
+      "text": "مرة واحدة. أنا أسلم increments، أجزاء."
+    },
+    {
+      "timestamp_s": 93.8,
+      "end_s": 97.0,
+      "text": "أعمل by deliver incrementally، يعني أجزاء"
+    },
+    {
+      "timestamp_s": 97.2,
+      "end_s": 98.9,
+      "text": "صغيرة. تمام."
+    },
+    {
+      "timestamp_s": 100.1,
+      "end_s": 103.9,
+      "text": "والدنيا حلوة والدنيا جميلة، فهذا"
+    },
+    {
+      "timestamp_s": 103.9,
+      "end_s": 107.1,
+      "text": "طبعًا agile."
+    }
+  ],
+  "language": "ar-x-autogen"
+}

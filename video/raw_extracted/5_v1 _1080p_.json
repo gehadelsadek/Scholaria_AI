@@ -1,0 +1,1512 @@
+{
+  "source_name": "5_v1 (1080p)",
+  "source_type": "video",
+  "pages": [
+    {
+      "timestamp_s": 0.3,
+      "end_s": 3.8,
+      "text": "بسم الله. رقم 5: Types of project life"
+    },
+    {
+      "timestamp_s": 3.8,
+      "end_s": 6.8,
+      "text": "cycles. أنواع دورات حياة المشروع."
+    },
+    {
+      "timestamp_s": 8.6,
+      "end_s": 12.3,
+      "text": "هنا سأحدثك عن 5 دورات حياة. سأشرحها"
+    },
+    {
+      "timestamp_s": 12.4,
+      "end_s": 16.1,
+      "text": "لك الآن. رقم 1: Predictive life cycle."
+    },
+    {
+      "timestamp_s": 16.2,
+      "end_s": 20.1,
+      "text": "دورة الحياة التنبؤية. رقم 2: Iterative"
+    },
+    {
+      "timestamp_s": 20.1,
+      "end_s": 22.4,
+      "text": "life cycle. دورة الحياة التكرارية."
+    },
+    {
+      "timestamp_s": 22.6,
+      "end_s": 26.1,
+      "text": "رقم 3: Incremental life cycle. دورة الحياة"
+    },
+    {
+      "timestamp_s": 26.1,
+      "end_s": 29.6,
+      "text": "المتزايدة. رقم 4: Agile life cycle."
+    },
+    {
+      "timestamp_s": 29.7,
+      "end_s": 33.5,
+      "text": "دورة الحياة الرشيقة. رقم 5: Hybrid life cycle."
+    },
+    {
+      "timestamp_s": 33.6,
+      "end_s": 37.5,
+      "text": "دورة الحياة الهاجين. وفي النهاية سأقدم لك summary."
+    },
+    {
+      "timestamp_s": 38.7,
+      "end_s": 42.5,
+      "text": "أهم 3 دورات، وسيتكرر في الامتحان"
+    },
+    {
+      "timestamp_s": 42.7,
+      "end_s": 46.5,
+      "text": "رقم 1 ورقم 4 ورقم"
+    },
+    {
+      "timestamp_s": 46.6,
+      "end_s": 48.7,
+      "text": "5. الطريقة التقليدية،"
+    },
+    {
+      "timestamp_s": 49.6,
+      "end_s": 53.5,
+      "text": "والأجائل، وطبعًا الـ hybrid التي هي mix أو"
+    },
+    {
+      "timestamp_s": 53.5,
+      "end_s": 54.8,
+      "text": "هجين ما بينهم."
+    },
+    {
+      "timestamp_s": 57.0,
+      "end_s": 60.7,
+      "text": "رقم 2 و3 هم أقل أهمية. سأشرحهما لك، لكن"
+    },
+    {
+      "timestamp_s": 60.7,
+      "end_s": 64.6,
+      "text": "ستعرفهما مجرد تعريفات، 2 و3. لأننا"
+    },
+    {
+      "timestamp_s": 64.9,
+      "end_s": 68.8,
+      "text": "عندما دمجنا الدوراتين معًا، أخرجنا"
+    },
+    {
+      "timestamp_s": 68.8,
+      "end_s": 72.2,
+      "text": "رقم 4 التي هي الأجائل. فالأجائل في"
+    },
+    {
+      "timestamp_s": 72.2,
+      "end_s": 75.2,
+      "text": "تعريفه إن هو iterative و incremental."
+    },
+    {
+      "timestamp_s": 75.6,
+      "end_s": 79.5,
+      "text": "هذا زائد هذا، دمجناهما معًا، وهذا"
+    },
+    {
+      "timestamp_s": 79.6,
+      "end_s": 83.5,
+      "text": "الذي يحقق Agile manifesto، أو القيم"
+    },
+    {
+      "timestamp_s": 83.5,
+      "end_s": 87.2,
+      "text": "والمبادئ الخاصة بالـ manifesto. لذلك هذا هو الذي يرضي العميل، رقم"
+    },
+    {
+      "timestamp_s": 87.2,
+      "end_s": 91.2,
+      "text": "الأجائل هذا. حسنًا؟ إنما سأوضح لك"
+    },
+    {
+      "timestamp_s": 91.3,
+      "end_s": 94.4,
+      "text": "هذه كتعريفات لتكون فاهمًا للـ concept الخاص بهم."
+    },
+    {
+      "timestamp_s": 94.6,
+      "end_s": 97.9,
+      "text": "هيا بنا، بدون كلام كثير، ولندخل على الرقم"
+    },
+    {
+      "timestamp_s": 100.4,
+      "end_s": 104.3,
+      "text": "1. دورة الحياة التنبؤية أو الشلالية أو التقليدية"
+    },
+    {
+      "timestamp_s": 104.3,
+      "end_s": 106.8,
+      "text": "أو التنبؤية Predictive life cycle،"
+    },
+    {
+      "timestamp_s": 107.7,
+      "end_s": 111.4,
+      "text": "أو النهج التقليدي. يتم التخطيط للمشروع بشكل"
+    },
+    {
+      "timestamp_s": 111.4,
+      "end_s": 114.5,
+      "text": "مفصل مسبقًا up front. أي لا"
+    },
+    {
+      "timestamp_s": 115.2,
+      "end_s": 119.1,
+      "text": "يصح أن أذهب للتنفيذ وأنا لست مخططًا بعد، لا، لابد أن أخطط للمشروع كله Plan"
+    },
+    {
+      "timestamp_s": 119.2,
+      "end_s": 119.5,
+      "text": "driven."
+    },
+    {
+      "timestamp_s": 120.8,
+      "end_s": 121.9,
+      "text": "لأن عندي درجة"
+    },
+    {
+      "timestamp_s": 122.8,
+      "end_s": 125.8,
+      "text": "يقين عالية جدًا بمتطلبات المشروع."
+    },
+    {
+      "timestamp_s": 126.0,
+      "end_s": 130.0,
+      "text": "ولكن لا تتوقع Value ستخرج لك في"
+    },
+    {
+      "timestamp_s": 130.0,
+      "end_s": 133.6,
+      "text": "منتصف المشروع. الـ value تخرج لك at the end في نهاية"
+    },
+    {
+      "timestamp_s": 133.6,
+      "end_s": 136.7,
+      "text": "المشروع. وأمثلة على هذا، مثل المشاريع"
+    },
+    {
+      "timestamp_s": 136.8,
+      "end_s": 139.9,
+      "text": "الإنشائية أو الـ construction"
+    },
+    {
+      "timestamp_s": 140.1,
+      "end_s": 143.8,
+      "text": "projects التي نفذت منها كثيرًا in the past في"
+    },
+    {
+      "timestamp_s": 143.8,
+      "end_s": 147.4,
+      "text": "الماضي، لديك منها كثير. ونمشي"
+    },
+    {
+      "timestamp_s": 147.4,
+      "end_s": 151.3,
+      "text": "المشروع على phases أو مراحل نمشي بالشكل هذا، نعمل"
+    },
+    {
+      "timestamp_s": 151.3,
+      "end_s": 155.3,
+      "text": "analysis, design, build, test, deliver."
+    },
+    {
+      "timestamp_s": 155.8,
+      "end_s": 159.3,
+      "text": "نحلل، نصمم، نبني، نختبر، نسلم في النهاية."
+    },
+    {
+      "timestamp_s": 159.9,
+      "end_s": 163.9,
+      "text": "أسلم منتجي بالكامل في النهاية"
+    },
+    {
+      "timestamp_s": 164.0,
+      "end_s": 167.9,
+      "text": "at the end. فالـ value أو الـ business value تتسلم"
+    },
+    {
+      "timestamp_s": 167.9,
+      "end_s": 170.9,
+      "text": "متى؟ في النهاية. فنمشي هنا على"
+    },
+    {
+      "timestamp_s": 170.9,
+      "end_s": 174.9,
+      "text": "phases أو على مراحل، كل phase"
+    },
+    {
+      "timestamp_s": 175.1,
+      "end_s": 179.0,
+      "text": "تسلم الأخرى. انتهينا من"
+    },
+    {
+      "timestamp_s": 179.2,
+      "end_s": 183.0,
+      "text": "رقم 1. اذهب إلى رقم 2. دورة"
+    },
+    {
+      "timestamp_s": 183.0,
+      "end_s": 186.5,
+      "text": "الحياة التكرارية، أو Iterative life cycle."
+    },
+    {
+      "timestamp_s": 187.6,
+      "end_s": 191.6,
+      "text": "هذه تتناسب مع المشاريع التي هي تكون معقدة"
+    },
+    {
+      "timestamp_s": 191.9,
+      "end_s": 192.4,
+      "text": "جدًا."
+    },
+    {
+      "timestamp_s": 193.7,
+      "end_s": 197.3,
+      "text": "التعقيد فيها يكون مرتفع Complexity is"
+    },
+    {
+      "timestamp_s": 197.3,
+      "end_s": 197.8,
+      "text": "high."
+    },
+    {
+      "timestamp_s": 198.7,
+      "end_s": 202.4,
+      "text": "على سبيل المثال، مشاريع تفعلها لأول مرة في حياتك، لم تكن"
+    },
+    {
+      "timestamp_s": 202.6,
+      "end_s": 206.4,
+      "text": "موجودة سابقًا. مثل أن تصنع لقاحًا، مثل"
+    },
+    {
+      "timestamp_s": 206.7,
+      "end_s": 209.5,
+      "text": "لقاح كورونا على سبيل المثال، هذا لم يكن موجودًا سابقًا."
+    },
+    {
+      "timestamp_s": 210.0,
+      "end_s": 213.7,
+      "text": "ولكي نصنعه لن يصنع في يوم وليلة. نحن سنعمل"
+    },
+    {
+      "timestamp_s": 213.8,
+      "end_s": 217.3,
+      "text": "وننتج، ويخرج ما خرج هذا غير مضبوط، نعود نأخذ"
+    },
+    {
+      "timestamp_s": 217.4,
+      "end_s": 221.2,
+      "text": "feedback ونحسن، ويخرج مرة أخرى غير مضبوط، feedback"
+    },
+    {
+      "timestamp_s": 221.3,
+      "end_s": 224.8,
+      "text": "ونحسن، نجرب تجارب كثيرة، لكي في"
+    },
+    {
+      "timestamp_s": 224.9,
+      "end_s": 228.6,
+      "text": "النهاية يخرج لك المنتج الذي تريده في"
+    },
+    {
+      "timestamp_s": 228.6,
+      "end_s": 232.5,
+      "text": "النهاية، مرة واحدة يخرج صحيح. حسنًا؟"
+    },
+    {
+      "timestamp_s": 232.6,
+      "end_s": 235.7,
+      "text": "فالموضوع بيشتغل بالشكل هذا. How"
+    },
+    {
+      "timestamp_s": 236.1,
+      "end_s": 239.9,
+      "text": "iterative life cycle work؟ أول شيء: أحدد المتطلبات،"
+    },
+    {
+      "timestamp_s": 240.0,
+      "end_s": 243.8,
+      "text": "بن design، نطور، نختبر ونقيّم ونأخذ"
+    },
+    {
+      "timestamp_s": 243.9,
+      "end_s": 247.7,
+      "text": "feedback، ونعود نحسن ونعدل مرة أخرى،"
+    },
+    {
+      "timestamp_s": 247.9,
+      "end_s": 251.7,
+      "text": "والـ cycle شغالة. الدورة عندي يعمل لها"
+    },
+    {
+      "timestamp_s": 251.7,
+      "end_s": 255.4,
+      "text": "repeat، تقعد تتكرر معي. كل cycle"
+    },
+    {
+      "timestamp_s": 255.5,
+      "end_s": 259.2,
+      "text": "نعملها أو iteration نعمله يضيف قيمة، ويقلل قليلًا"
+    },
+    {
+      "timestamp_s": 259.6,
+      "end_s": 263.4,
+      "text": "من المخاطر، ويقلل من عدم اليقين، وتتضح"
+    },
+    {
+      "timestamp_s": 263.4,
+      "end_s": 266.7,
+      "text": "الرؤية قليلًا، لكي في النهاية"
+    },
+    {
+      "timestamp_s": 267.2,
+      "end_s": 271.0,
+      "text": "نصل إلى أفضل منتج يلبي احتياجات العميل."
+    },
+    {
+      "timestamp_s": 271.5,
+      "end_s": 274.2,
+      "text": "فالموضوع أكيد ممكن يأخذ وقت."
+    },
+    {
+      "timestamp_s": 275.4,
+      "end_s": 279.3,
+      "text": "الموضوع هنا ليس معتمد على السرعة، على قد ما نحن نريد أن"
+    },
+    {
+      "timestamp_s": 279.5,
+      "end_s": 283.5,
+      "text": "نتعلم ونعمل learning و continuous learning و continuous"
+    },
+    {
+      "timestamp_s": 283.5,
+      "end_s": 285.9,
+      "text": "improvement، لن increase الـ value."
+    },
+    {
+      "timestamp_s": 286.0,
+      "end_s": 289.3,
+      "text": "فالموضوع هذا ممكن take longer، يعني ممكن يأخذ وقت مننا،"
+    },
+    {
+      "timestamp_s": 290.4,
+      "end_s": 293.5,
+      "text": "لكي يحصل optimization مع الوقت."
+    },
+    {
+      "timestamp_s": 294.4,
+      "end_s": 296.5,
+      "text": "ولكن التكرارات التي نعملها هذه،"
+    },
+    {
+      "timestamp_s": 297.4,
+      "end_s": 300.8,
+      "text": "تساعد في تحديد وتقليل عدم اليقين"
+    },
+    {
+      "timestamp_s": 301.0,
+      "end_s": 304.8,
+      "text": "في المشروع، وطبعًا الـ feedback الذي نأخذه،"
+    },
+    {
+      "timestamp_s": 305.3,
+      "end_s": 308.5,
+      "text": "وهكذا. فنحن نحاول نعمل prototype،"
+    },
+    {
+      "timestamp_s": 309.2,
+      "end_s": 313.0,
+      "text": "أو نماذج أولية متتالية، ونأخذ عليها feedback"
+    },
+    {
+      "timestamp_s": 313.1,
+      "end_s": 316.7,
+      "text": "لتتضح الرؤية، قليلًا بقليل. حسنًا؟"
+    },
+    {
+      "timestamp_s": 317.2,
+      "end_s": 320.6,
+      "text": "فكل منتج يخرج يكون unfinished، أي"
+    },
+    {
+      "timestamp_s": 321.2,
+      "end_s": 324.6,
+      "text": "غير جاهز. Unfinished work، شغل غير"
+    },
+    {
+      "timestamp_s": 324.7,
+      "end_s": 328.4,
+      "text": "جاهز. نأخذ عليه feedback و improve و modify،"
+    },
+    {
+      "timestamp_s": 328.5,
+      "end_s": 329.7,
+      "text": "نحسن ونعدل."
+    },
+    {
+      "timestamp_s": 330.6,
+      "end_s": 334.6,
+      "text": "وهكذا تكرارات شغالة لا تتوقف حتى نصل في النهاية للي نريده،"
+    },
+    {
+      "timestamp_s": 335.2,
+      "end_s": 336.1,
+      "text": "هذا هو الـ iterative."
+    },
+    {
+      "timestamp_s": 337.4,
+      "end_s": 340.0,
+      "text": "فهو يمشي بالشكل الـ iterative life cycle."
+    },
+    {
+      "timestamp_s": 340.6,
+      "end_s": 341.9,
+      "text": "على سبيل المثال، نعمل analysis"
+    },
+    {
+      "timestamp_s": 342.7,
+      "end_s": 346.6,
+      "text": "و design نقعد نكرر analysis, design، analysis, design،"
+    },
+    {
+      "timestamp_s": 346.7,
+      "end_s": 348.8,
+      "text": "analysis, design. بعد ذلك، ماذا"
+    },
+    {
+      "timestamp_s": 348.8,
+      "end_s": 353.2,
+      "text": "نفعل؟"
+    },
+    {
+      "timestamp_s": 353.3,
+      "end_s": 357.1,
+      "text": "نقعد نعمل هنا build, test, build, test, build, test."
+    },
+    {
+      "timestamp_s": 357.8,
+      "end_s": 360.6,
+      "text": "نقعد نكرر فيهم build, test, build, test."
+    },
+    {
+      "timestamp_s": 361.0,
+      "end_s": 362.3,
+      "text": "وفي النهاية نصلف once في"
+    },
+    {
+      "timestamp_s": 363.2,
+      "end_s": 367.1,
+      "text": "النهاية بعد محاولات كثيرة. هذا الـ"
+    },
+    {
+      "timestamp_s": 367.2,
+      "end_s": 369.1,
+      "text": "iterative life cycle."
+    },
+    {
+      "timestamp_s": 370.9,
+      "end_s": 374.4,
+      "text": "رقم ثلاثة Incremental Life Cycle."
+    },
+    {
+      "timestamp_s": 374.6,
+      "end_s": 376.6,
+      "text": "دورة الحياة المتزايدة."
+    },
+    {
+      "timestamp_s": 377.9,
+      "end_s": 378.1,
+      "text": "هنا"
+    },
+    {
+      "timestamp_s": 379.0,
+      "end_s": 380.0,
+      "text": "عكس التي فاتت."
+    },
+    {
+      "timestamp_s": 381.2,
+      "end_s": 382.9,
+      "text": "ماذا يعني ذلك؟ هنا يهتم بالسرعة."
+    },
+    {
+      "timestamp_s": 384.3,
+      "end_s": 388.1,
+      "text": "هنا الـ speed أهم شيء لدي، هذا هو الـ goal الخاص بي، هذا هو الـ major goal"
+    },
+    {
+      "timestamp_s": 388.1,
+      "end_s": 388.7,
+      "text": "الخاص بي، الـ"
+    },
+    {
+      "timestamp_s": 389.5,
+      "end_s": 392.3,
+      "text": "speed أو السرعة هو الهدف الرئيسي الخاص بي."
+    },
+    {
+      "timestamp_s": 393.6,
+      "end_s": 397.1,
+      "text": "الـ Incremental Life Cycle يتناسب مع العملاء"
+    },
+    {
+      "timestamp_s": 397.1,
+      "end_s": 400.8,
+      "text": "الذين لا يريدون أن ينتظروا كثيرًا، مستعجلين قليلًا،"
+    },
+    {
+      "timestamp_s": 401.4,
+      "end_s": 404.7,
+      "text": "لن ينتظروا سنة حتى تخرج له المنتج."
+    },
+    {
+      "timestamp_s": 405.0,
+      "end_s": 408.6,
+      "text": "أخرج له جزء صغير ولكن يكون جزء finished"
+    },
+    {
+      "timestamp_s": 409.4,
+      "end_s": 413.0,
+      "text": "يعني جزء finished deliverable يعني جزء صغير لكنه"
+    },
+    {
+      "timestamp_s": 413.3,
+      "end_s": 416.8,
+      "text": "يكون يعمل ويستطيع أن يستخدمه الآن حالًا."
+    },
+    {
+      "timestamp_s": 418.0,
+      "end_s": 421.6,
+      "text": "ونطور ونحسن مع الوقت. نقوم بإضافة جزء"
+    },
+    {
+      "timestamp_s": 422.3,
+      "end_s": 423.7,
+      "text": "بجزء، يعني increment"
+    },
+    {
+      "timestamp_s": 424.6,
+      "end_s": 425.3,
+      "text": "increment."
+    },
+    {
+      "timestamp_s": 426.7,
+      "end_s": 429.7,
+      "text": "فالـ value عندي تُسلم على stages أو على مراحل."
+    },
+    {
+      "timestamp_s": 429.8,
+      "end_s": 431.6,
+      "text": "كل increment يضيف value."
+    },
+    {
+      "timestamp_s": 433.1,
+      "end_s": 434.7,
+      "text": "حسنًا، نأخذ مثالًا على هذا الموضوع."
+    },
+    {
+      "timestamp_s": 434.7,
+      "end_s": 436.2,
+      "text": "ماذا سأفعل أول مرة؟"
+    },
+    {
+      "timestamp_s": 437.3,
+      "end_s": 441.2,
+      "text": "Analyze، أحلل، أصمم، أبني، أختبر، أسلم."
+    },
+    {
+      "timestamp_s": 441.2,
+      "end_s": 445.0,
+      "text": "أسلم ماذا؟ مثلًا أبني برج، أبدأ ببناء برج من"
+    },
+    {
+      "timestamp_s": 445.0,
+      "end_s": 448.6,
+      "text": "خمسة طوابق. أخرجت الدور الأرضي مثلًا، سيخرج مكتمل."
+    },
+    {
+      "timestamp_s": 449.5,
+      "end_s": 452.2,
+      "text": "finished. انظر finished deliverable."
+    },
+    {
+      "timestamp_s": 452.9,
+      "end_s": 454.4,
+      "text": "هو جزء يكون small."
+    },
+    {
+      "timestamp_s": 455.5,
+      "end_s": 459.1,
+      "text": "Small increment، جزء صغير لكنه يكون"
+    },
+    {
+      "timestamp_s": 459.2,
+      "end_s": 462.2,
+      "text": "finished مكتمل، نستطيع أن نستخدمه حاليًا"
+    },
+    {
+      "timestamp_s": 462.3,
+      "end_s": 465.2,
+      "text": "الآن. انتهينا، ندخل على الذي بعده."
+    },
+    {
+      "timestamp_s": 465.8,
+      "end_s": 468.5,
+      "text": "Analysis, design, build, test, deliver."
+    },
+    {
+      "timestamp_s": 468.7,
+      "end_s": 472.5,
+      "text": "نخرج بالدور الأول ويكون مكتمل، والوضع جيد."
+    },
+    {
+      "timestamp_s": 473.9,
+      "end_s": 477.7,
+      "text": "يعني small increment نسلمه finished نستطيع أن"
+    },
+    {
+      "timestamp_s": 477.7,
+      "end_s": 480.3,
+      "text": "نستخدمه. وهكذا ندخل على الذي بعده."
+    },
+    {
+      "timestamp_s": 482.1,
+      "end_s": 484.7,
+      "text": "Analysis, design, build, test, deliver."
+    },
+    {
+      "timestamp_s": 485.3,
+      "end_s": 485.7,
+      "text": "ونستمر نعمل"
+    },
+    {
+      "timestamp_s": 487.0,
+      "end_s": 491.0,
+      "text": "دور ثاني، ثالث، رابع. كل دور"
+    },
+    {
+      "timestamp_s": 491.1,
+      "end_s": 493.7,
+      "text": "يكون finished small increment مكتمل."
+    },
+    {
+      "timestamp_s": 494.6,
+      "end_s": 498.0,
+      "text": "هنا السرعة أهم شيء عندي. العميل يريد شيء يكون مكتمل"
+    },
+    {
+      "timestamp_s": 499.0,
+      "end_s": 502.6,
+      "text": "يستطيع أن يستخدمها immediately. تمام؟ أو حالًا الآن."
+    },
+    {
+      "timestamp_s": 503.9,
+      "end_s": 507.5,
+      "text": "تمام؟ فـ Incremental Life Cycle تساعد على"
+    },
+    {
+      "timestamp_s": 507.5,
+      "end_s": 510.5,
+      "text": "تسليم أجزاء مفيدة من الـ solution الخاص بي"
+    },
+    {
+      "timestamp_s": 511.3,
+      "end_s": 514.7,
+      "text": "بشكل أسرع ونتكيف بسرعة، وبالتالي"
+    },
+    {
+      "timestamp_s": 515.1,
+      "end_s": 517.2,
+      "text": "نعظم من رضا العملاء."
+    },
+    {
+      "timestamp_s": 518.4,
+      "end_s": 520.3,
+      "text": "هذا هو الـ Incremental Life Cycle."
+    },
+    {
+      "timestamp_s": 520.7,
+      "end_s": 522.1,
+      "text": "أكيد الآن ممكن"
+    },
+    {
+      "timestamp_s": 522.9,
+      "end_s": 526.6,
+      "text": "حدث لك laps ما بين الـ Iterative والـ Incremental، 2 و3."
+    },
+    {
+      "timestamp_s": 526.7,
+      "end_s": 530.3,
+      "text": "أنا قلت لك تعرفهم كمفهوم فقط، كتعريفات يعني."
+    },
+    {
+      "timestamp_s": 531.7,
+      "end_s": 535.2,
+      "text": "جلبت لك مثالًا سهلًا جدًا يوضح الفرق بين الاثنين."
+    },
+    {
+      "timestamp_s": 535.3,
+      "end_s": 537.8,
+      "text": "صورة الموناليزا، أكيد كلنا نعرفها."
+    },
+    {
+      "timestamp_s": 538.1,
+      "end_s": 541.7,
+      "text": "صورة الموناليزا، سنطبق عليها مفهومينا"
+    },
+    {
+      "timestamp_s": 541.8,
+      "end_s": 545.0,
+      "text": "اللذين هما الـ Iterative وأيضًا الـ Incremental."
+    },
+    {
+      "timestamp_s": 545.4,
+      "end_s": 546.4,
+      "text": "هيا بنا."
+    },
+    {
+      "timestamp_s": 547.3,
+      "end_s": 550.2,
+      "text": "سنبدأ بالعمل بالـ Iterative، ما هو؟"
+    },
+    {
+      "timestamp_s": 551.2,
+      "end_s": 554.6,
+      "text": "المشروع عندي معقد جدًا، ليس واضحًا"
+    },
+    {
+      "timestamp_s": 555.1,
+      "end_s": 558.4,
+      "text": "إطلاقًا. فسنبدأ بالعمل، نقوم بعمل Iteration أو تكرار،"
+    },
+    {
+      "timestamp_s": 559.0,
+      "end_s": 562.9,
+      "text": "وخرجنا بهذا الشكل الذي أمامك. للأسف unfinished work، عمل"
+    },
+    {
+      "timestamp_s": 563.1,
+      "end_s": 566.5,
+      "text": "غير مكتمل. سنأخذ عليه feedback ونبدأ"
+    },
+    {
+      "timestamp_s": 566.6,
+      "end_s": 570.0,
+      "text": "نحسن. دخلنا على الذي بعده، قمنا بـ"
+    },
+    {
+      "timestamp_s": 570.1,
+      "end_s": 573.4,
+      "text": "Iteration جديد، للأسف خرج عمل غير"
+    },
+    {
+      "timestamp_s": 573.5,
+      "end_s": 577.0,
+      "text": "مكتمل. سنأخذ feedback عليه ونعود"
+    },
+    {
+      "timestamp_s": 577.3,
+      "end_s": 580.9,
+      "text": "نحسن ونطور ونعدل. خرجنا بعد ذلك، قمنا"
+    },
+    {
+      "timestamp_s": 581.0,
+      "end_s": 585.0,
+      "text": "بتكرار جديد Iteration جديد، للأسف ليس هذا"
+    },
+    {
+      "timestamp_s": 585.2,
+      "end_s": 588.6,
+      "text": "ما نريده. سنأخذ feedback عليه ونعمل"
+    },
+    {
+      "timestamp_s": 589.0,
+      "end_s": 592.8,
+      "text": "ونحسن ونصل إلى هذه. سنقوم بتكرار جديد،"
+    },
+    {
+      "timestamp_s": 592.9,
+      "end_s": 595.4,
+      "text": "للأسف unfinished work عمل غير مكتمل."
+    },
+    {
+      "timestamp_s": 595.7,
+      "end_s": 598.8,
+      "text": "سنأخذ feedback عليه ونبدأ نعمل"
+    },
+    {
+      "timestamp_s": 599.2,
+      "end_s": 603.2,
+      "text": "ونحسن. توقف إلى هنا يا باشا، أنت"
+    },
+    {
+      "timestamp_s": 603.2,
+      "end_s": 606.7,
+      "text": "هكذا انتهيت، قمت deliver للـ product الخاص بك، هذا ما"
+    },
+    {
+      "timestamp_s": 607.1,
+      "end_s": 610.9,
+      "text": "نريده. لكن لم يخرج مرة واحدة، خرج"
+    },
+    {
+      "timestamp_s": 610.9,
+      "end_s": 614.6,
+      "text": "بعد تكرارات، بعد محاولات، بعد feedback"
+    },
+    {
+      "timestamp_s": 614.6,
+      "end_s": 618.3,
+      "text": "كثير، بعد عمل غير جاهز كثير، إلى أن"
+    },
+    {
+      "timestamp_s": 618.4,
+      "end_s": 622.0,
+      "text": "الحمد لله خرجنا one time مرة في الوحدة في"
+    },
+    {
+      "timestamp_s": 622.1,
+      "end_s": 624.4,
+      "text": "الآخر بالمنتج الذي نريده. حسنًا،"
+    },
+    {
+      "timestamp_s": 626.0,
+      "end_s": 629.1,
+      "text": "نأتي ونطبق الـ Incremental على نفس المثال."
+    },
+    {
+      "timestamp_s": 629.4,
+      "end_s": 633.1,
+      "text": "الـ Incremental قوته في ماذا؟ كل جزء صغير"
+    },
+    {
+      "timestamp_s": 633.2,
+      "end_s": 636.8,
+      "text": "يخرج يكون جزء مكتمل، لن ألمسه ولن آتي بجانبه"
+    },
+    {
+      "timestamp_s": 636.9,
+      "end_s": 640.6,
+      "text": "مرة أخرى. قمنا أول cycle لدينا فخرجنا"
+    },
+    {
+      "timestamp_s": 640.6,
+      "end_s": 644.1,
+      "text": "بالجزء الصغير هذا small increment. هذا ممتاز."
+    },
+    {
+      "timestamp_s": 645.7,
+      "end_s": 647.1,
+      "text": "عملنا التكرار الذي بعده،"
+    },
+    {
+      "timestamp_s": 648.2,
+      "end_s": 652.0,
+      "text": "أي كأنك تبني، كأنك تكمل عليه. الذي فات مات،"
+    },
+    {
+      "timestamp_s": 652.1,
+      "end_s": 655.3,
+      "text": "الذي فات finished، قدمته للعميل واستلمه."
+    },
+    {
+      "timestamp_s": 656.9,
+      "end_s": 660.6,
+      "text": "عملنا increment increment. أقوم بتسليم جزء"
+    },
+    {
+      "timestamp_s": 661.2,
+      "end_s": 665.0,
+      "text": "بجزء، جزء بجزء، جزء بجزء، وكل جزء أستخدمه يكون finished."
+    },
+    {
+      "timestamp_s": 665.4,
+      "end_s": 668.6,
+      "text": "السرعة أهم شيء عندي هنا، الـ speed هو"
+    },
+    {
+      "timestamp_s": 669.3,
+      "end_s": 672.9,
+      "text": "الـ goal الخاص بي في الـ Incremental."
+    },
+    {
+      "timestamp_s": 674.1,
+      "end_s": 677.8,
+      "text": "حسنًا؟ أعتقد الآن أصبح الموضوع واضح،"
+    },
+    {
+      "timestamp_s": 677.9,
+      "end_s": 680.3,
+      "text": "الفرق بين الاثنين. أقول لك"
+    },
+    {
+      "timestamp_s": 681.3,
+      "end_s": 685.1,
+      "text": "ماذا؟ نأتي الآن لندمج الـ Iterative مع الـ"
+    },
+    {
+      "timestamp_s": 685.2,
+      "end_s": 686.2,
+      "text": "Incremental،"
+    },
+    {
+      "timestamp_s": 687.1,
+      "end_s": 689.2,
+      "text": "نضربهم مع بعض ونرى"
+    },
+    {
+      "timestamp_s": 690.7,
+      "end_s": 694.3,
+      "text": "ماذا سنخرج. سنخرج الـ Agile Life Cycle."
+    },
+    {
+      "timestamp_s": 695.2,
+      "end_s": 698.7,
+      "text": "رقم أربعة. فالـ Agile هو الـ Iterative هو الـ"
+    },
+    {
+      "timestamp_s": 698.8,
+      "end_s": 701.2,
+      "text": "Incremental فيسمونه الـ Adaptive."
+    },
+    {
+      "timestamp_s": 701.8,
+      "end_s": 705.5,
+      "text": "هو التكراري المتزايد التكيفي،"
+    },
+    {
+      "timestamp_s": 705.7,
+      "end_s": 707.2,
+      "text": "يجمع بين الاثنين."
+    },
+    {
+      "timestamp_s": 708.3,
+      "end_s": 711.8,
+      "text": "فالـ Agile هو نهج يجمع بين الاثنين."
+    },
+    {
+      "timestamp_s": 713.0,
+      "end_s": 716.8,
+      "text": "حسنًا؟ فأخذ من مواصفات هذا وأخذ"
+    },
+    {
+      "timestamp_s": 716.9,
+      "end_s": 720.8,
+      "text": "من مواصفات هذا. ماذا أخذ من هذا و هذا؟ أخذنا من الـ"
+    },
+    {
+      "timestamp_s": 720.8,
+      "end_s": 724.2,
+      "text": "Iterative أن نتقبل التغيير ونحسن،"
+    },
+    {
+      "timestamp_s": 724.8,
+      "end_s": 728.5,
+      "text": "وأخذنا من الـ Incremental أنني أخرج أجزاء صغيرة"
+    },
+    {
+      "timestamp_s": 728.5,
+      "end_s": 732.4,
+      "text": "وأرضي العميل. فأخذ من مواصفات الاثنين، لذلك"
+    },
+    {
+      "timestamp_s": 733.2,
+      "end_s": 737.0,
+      "text": "خرجنا بشيء اسمه Agile. هذه التي تلتزم بـ"
+    },
+    {
+      "timestamp_s": 737.1,
+      "end_s": 741.1,
+      "text": "Agile Manifesto. فالـ Agile Lifecycle هي التي تلتزم"
+    },
+    {
+      "timestamp_s": 741.2,
+      "end_s": 742.3,
+      "text": "بمبادئ"
+    },
+    {
+      "timestamp_s": 743.2,
+      "end_s": 747.1,
+      "text": "Agile Manifesto، التي هي الأربع قيم والـ 12 مبدأ."
+    },
+    {
+      "timestamp_s": 747.9,
+      "end_s": 751.2,
+      "text": "فـ Agile جاءت من أجل customer satisfaction، رضا العميل."
+    },
+    {
+      "timestamp_s": 752.1,
+      "end_s": 755.6,
+      "text": "متى يكون العميل راضيا؟ عندما أسلمه أجزاء"
+    },
+    {
+      "timestamp_s": 755.8,
+      "end_s": 759.5,
+      "text": "بشكل مبكر ومستمر. أسلمه ماذا؟ Valuable"
+    },
+    {
+      "timestamp_s": 759.6,
+      "end_s": 763.5,
+      "text": "product، أو منتج ذا قيمة. وعندما يطلب تغييرًا"
+    },
+    {
+      "timestamp_s": 763.6,
+      "end_s": 767.2,
+      "text": "أقول له: أهلا بالتغيير. وفي نفس الوقت أحاول أن"
+    },
+    {
+      "timestamp_s": 767.2,
+      "end_s": 768.9,
+      "text": "أسلمه على أجزاء صغيرة."
+    },
+    {
+      "timestamp_s": 769.8,
+      "end_s": 773.4,
+      "text": "فالـ Agile تناسب مع أي؟ مع مشاريع الـ Software Projects، أو"
+    },
+    {
+      "timestamp_s": 773.4,
+      "end_s": 776.5,
+      "text": "مشاريع الملكية الفكرية، البحث، التطوير، الـ Marketing،"
+    },
+    {
+      "timestamp_s": 777.0,
+      "end_s": 780.4,
+      "text": "الأمور التي تحتاج adaptation، أي أن يكون هناك"
+    },
+    {
+      "timestamp_s": 780.4,
+      "end_s": 784.4,
+      "text": "تكيف مع التغييرات الكثيرة. فهذا هو"
+    },
+    {
+      "timestamp_s": 784.6,
+      "end_s": 788.3,
+      "text": "Agile. أستطيع أن أطبقه"
+    },
+    {
+      "timestamp_s": 788.3,
+      "end_s": 792.0,
+      "text": "بطرق كثيرة، كما وضحت لك اليوم إن شاء الله،"
+    },
+    {
+      "timestamp_s": 792.1,
+      "end_s": 795.9,
+      "text": "منها Scrum. أشهر منهجية هي Scrum،"
+    },
+    {
+      "timestamp_s": 796.0,
+      "end_s": 798.7,
+      "text": "أن أطبق Agile على Sprints،"
+    },
+    {
+      "timestamp_s": 799.6,
+      "end_s": 801.6,
+      "text": "أو Flow-Based Agile، وهو الـ Kanban."
+    },
+    {
+      "timestamp_s": 802.8,
+      "end_s": 804.5,
+      "text": "الـ To-do والـ Doing والـ Done."
+    },
+    {
+      "timestamp_s": 805.4,
+      "end_s": 809.2,
+      "text": "مثلما فعلنا في أول دقيقتين في الـ course، وضعنا"
+    },
+    {
+      "timestamp_s": 809.2,
+      "end_s": 813.2,
+      "text": "الأجندة الخاصة بالـ course كلها في عمود، ونسحب منها في العمود الذي في"
+    },
+    {
+      "timestamp_s": 813.2,
+      "end_s": 817.2,
+      "text": "المنتصف، هذه هي الأعمال التي سنشتغل عليها، وعندما تنتهي سنرميها في"
+    },
+    {
+      "timestamp_s": 817.2,
+      "end_s": 820.5,
+      "text": "النهاية. الـ To-do والـ Doing والـ Done."
+    },
+    {
+      "timestamp_s": 820.6,
+      "end_s": 822.5,
+      "text": "هذه طريقة اسمها Kanban."
+    },
+    {
+      "timestamp_s": 823.5,
+      "end_s": 827.5,
+      "text": "حسنًا. فهذا هو Agile."
+    },
+    {
+      "timestamp_s": 828.6,
+      "end_s": 831.7,
+      "text": "أسلم العميل جزءًا صغيرًا، آخذ feedback،"
+    },
+    {
+      "timestamp_s": 832.4,
+      "end_s": 835.8,
+      "text": "أعود لأطور وأحسن، أسلمه مرة أخرى، آخذ feedback،"
+    },
+    {
+      "timestamp_s": 836.3,
+      "end_s": 839.9,
+      "text": "أعود لأطور وأحسن، آخذ feedback. فإشراك"
+    },
+    {
+      "timestamp_s": 840.0,
+      "end_s": 843.9,
+      "text": "العميل معي يكون بشكل مستمر، ليس مرة واحدة وأنام،"
+    },
+    {
+      "timestamp_s": 844.0,
+      "end_s": 847.9,
+      "text": "لا. إشراك العميل معي بشكل متكرر وبشكل"
+    },
+    {
+      "timestamp_s": 847.9,
+      "end_s": 851.8,
+      "text": "مستمر، وهذه أهم ميزات Agile. إذا أردت"
+    },
+    {
+      "timestamp_s": 852.1,
+      "end_s": 855.7,
+      "text": "تطبيق Agile بشكل صحيح، وأردت رضا العميل، يجب أن"
+    },
+    {
+      "timestamp_s": 855.8,
+      "end_s": 859.5,
+      "text": "تشركه معك كل بعض الوقت. آخر طريقة"
+    },
+    {
+      "timestamp_s": 859.5,
+      "end_s": 863.4,
+      "text": "عندنا اسمها الـ Hybrid Lifecycle، أو دورة الحياة الهجين."
+    },
+    {
+      "timestamp_s": 864.4,
+      "end_s": 864.4,
+      "text": "في"
+    },
+    {
+      "timestamp_s": 865.3,
+      "end_s": 868.6,
+      "text": "هذه ضربنا Waterfall و Agile في الخلاط معًا."
+    },
+    {
+      "timestamp_s": 868.8,
+      "end_s": 872.3,
+      "text": "خرجنا بالطريقة الهجين، هي mix ما بين النهج"
+    },
+    {
+      "timestamp_s": 872.3,
+      "end_s": 875.9,
+      "text": "التنبؤي والنهج الرشيق. دمجنا الاثنين معًا،"
+    },
+    {
+      "timestamp_s": 876.6,
+      "end_s": 880.2,
+      "text": "الـ Predictive و Agile. أي ليس"
+    },
+    {
+      "timestamp_s": 880.3,
+      "end_s": 884.2,
+      "text": "بالضروري أن أنفذ المشروع كله بنهج واحد،"
+    },
+    {
+      "timestamp_s": 884.2,
+      "end_s": 888.0,
+      "text": "لا طبعًا، ممكن أن mix. ممكن جزء في المشروع،"
+    },
+    {
+      "timestamp_s": 888.1,
+      "end_s": 892.1,
+      "text": "نصف المشروع أدره Agile، والنصف الثاني مثلًا"
+    },
+    {
+      "timestamp_s": 892.2,
+      "end_s": 895.9,
+      "text": "Waterfall، تقليدي. أو أدير المشروع مثلًا، عند"
+    },
+    {
+      "timestamp_s": 896.0,
+      "end_s": 899.7,
+      "text": "مشروع بناء مستشفى، كل أعمال الـ Construction التي"
+    },
+    {
+      "timestamp_s": 899.7,
+      "end_s": 903.5,
+      "text": "فيها أديرها بالطريقة التقليدية. إنما عندي جزء"
+    },
+    {
+      "timestamp_s": 903.6,
+      "end_s": 907.5,
+      "text": "صغير في المستشفى أدره بـ Agile، الجزء أو الأعمال التي"
+    },
+    {
+      "timestamp_s": 907.5,
+      "end_s": 911.5,
+      "text": "تحتاج مثل شغل الـ Software والـ IT، عمل mobile"
+    },
+    {
+      "timestamp_s": 911.6,
+      "end_s": 915.3,
+      "text": "application مثلًا، عمل website، عمل system للمستشفى،"
+    },
+    {
+      "timestamp_s": 915.8,
+      "end_s": 917.3,
+      "text": "كل هذا أدره Agile."
+    },
+    {
+      "timestamp_s": 918.1,
+      "end_s": 921.5,
+      "text": "أو أعمل Agile للمشروع كله، but هناك جزء صغير أعطيته"
+    },
+    {
+      "timestamp_s": 921.5,
+      "end_s": 925.4,
+      "text": "لمقاول مثلًا sub-contractor وهو سيديره"
+    },
+    {
+      "timestamp_s": 925.7,
+      "end_s": 927.6,
+      "text": "بالـ Predictive، وهكذا."
+    },
+    {
+      "timestamp_s": 929.0,
+      "end_s": 932.6,
+      "text": "فـ Hybrid يتناسب مع من؟ شركة مثلًا كانت تعمل"
+    },
+    {
+      "timestamp_s": 933.0,
+      "end_s": 936.2,
+      "text": "traditional، تقليدي، وتريد أن تنتقل إلى"
+    },
+    {
+      "timestamp_s": 936.3,
+      "end_s": 939.2,
+      "text": "Agile. لا يصح أن تنتقل مرة واحدة."
+    },
+    {
+      "timestamp_s": 940.1,
+      "end_s": 943.9,
+      "text": "يجب الأول أن tmix. أي دعنا نشتغل جزء وجزء،"
+    },
+    {
+      "timestamp_s": 943.9,
+      "end_s": 947.8,
+      "text": "حتى Team يتعلم أولًا، يعتاد. يعرف في الأول ماذا يعني Agile، أي لا"
+    },
+    {
+      "timestamp_s": 947.9,
+      "end_s": 951.7,
+      "text": "يزال يعمل بالتقليدي، ويبدأ يتعرف تدريجيًا"
+    },
+    {
+      "timestamp_s": 952.1,
+      "end_s": 955.9,
+      "text": "عن Agile. فهذه مرحلة انتقالية. الـ Hybrid ممكن أن"
+    },
+    {
+      "timestamp_s": 955.9,
+      "end_s": 957.3,
+      "text": "يكون مرحلة مثل transition،"
+    },
+    {
+      "timestamp_s": 958.2,
+      "end_s": 961.8,
+      "text": "أننا نشتغل بها بعض الوقت حتى"
+    },
+    {
+      "timestamp_s": 961.8,
+      "end_s": 962.8,
+      "text": "نشتغل Pure Agile،"
+    },
+    {
+      "timestamp_s": 964.1,
+      "end_s": 965.9,
+      "text": "نشتغل Agile فقط. حسنًا؟"
+    },
+    {
+      "timestamp_s": 966.8,
+      "end_s": 968.3,
+      "text": "فممكن أن يكون هكذا."
+    },
+    {
+      "timestamp_s": 969.4,
+      "end_s": 972.9,
+      "text": "أو طبيعة المشروع نفسه تحتاج hybrid، سواء هكذا،"
+    },
+    {
+      "timestamp_s": 973.3,
+      "end_s": 976.2,
+      "text": "أو سواء هكذا. حسنًا."
+    },
+    {
+      "timestamp_s": 976.8,
+      "end_s": 980.6,
+      "text": "والدنيا حلوة والدنيا جميلة. تعال الآن سأعمل"
+    },
+    {
+      "timestamp_s": 980.6,
+      "end_s": 983.4,
+      "text": "لك مقارنة سريعة بين هذه الأربع طرق"
+    },
+    {
+      "timestamp_s": 984.3,
+      "end_s": 987.3,
+      "text": "من حيث عدد مرات التسليم،"
+    },
+    {
+      "timestamp_s": 987.9,
+      "end_s": 991.2,
+      "text": "ودرجة التغيير في كل نوع منهم. سنمسك الطريقة"
+    },
+    {
+      "timestamp_s": 991.2,
+      "end_s": 992.0,
+      "text": "التقليدية."
+    },
+    {
+      "timestamp_s": 993.0,
+      "end_s": 996.6,
+      "text": "نجعلها low، ماذا يعني low؟ النهج"
+    },
+    {
+      "timestamp_s": 996.6,
+      "end_s": 999.7,
+      "text": "التقليدي low delivery, low change."
+    },
+    {
+      "timestamp_s": 1000.3,
+      "end_s": 1003.3,
+      "text": "لا يسلم كثير، أنا أسلم مرة واحدة فقط في النهاية."
+    },
+    {
+      "timestamp_s": 1003.7,
+      "end_s": 1007.4,
+      "text": "فالتسليم قليل، ولا يحب أن يغير. التغيير"
+    },
+    {
+      "timestamp_s": 1007.4,
+      "end_s": 1011.1,
+      "text": "مكلف ومتعب، فـ low change أيضًا. فالـ Predictive، أو"
+    },
+    {
+      "timestamp_s": 1011.3,
+      "end_s": 1012.7,
+      "text": "Waterfall، low، low."
+    },
+    {
+      "timestamp_s": 1013.6,
+      "end_s": 1017.5,
+      "text": "إنما الـ Incremental الذي يهتم بالـ Speed أو السرعة،"
+    },
+    {
+      "timestamp_s": 1018.2,
+      "end_s": 1022.1,
+      "text": "أخرج أجزاء صغيرة متفرقة، ستجد أن التسليم فيه"
+    },
+    {
+      "timestamp_s": 1022.1,
+      "end_s": 1025.6,
+      "text": "عالي. أسلم الدور الأول، الثاني، الثالث، الرابع،"
+    },
+    {
+      "timestamp_s": 1025.6,
+      "end_s": 1028.1,
+      "text": "أسلم أجزاء، كل جزء خلص."
+    },
+    {
+      "timestamp_s": 1029.0,
+      "end_s": 1032.8,
+      "text": "التسليم فيه عالي، but ستجده low change، التغيير فيه"
+    },
+    {
+      "timestamp_s": 1032.8,
+      "end_s": 1033.6,
+      "text": "قليل بعض الشيء."
+    },
+    {
+      "timestamp_s": 1034.7,
+      "end_s": 1038.6,
+      "text": "الـ Iterative، المشاريع المعقدة جدًا التي تعملها لأول"
+    },
+    {
+      "timestamp_s": 1038.6,
+      "end_s": 1041.9,
+      "text": "مرة تقريبًا، high change، التغيير فيها"
+    },
+    {
+      "timestamp_s": 1042.0,
+      "end_s": 1045.7,
+      "text": "عالي جدًا. وأسلم مرة واحدة فقط في"
+    },
+    {
+      "timestamp_s": 1045.7,
+      "end_s": 1049.5,
+      "text": "الآخر بعد تجارب كثيرة، ستجدها"
+    },
+    {
+      "timestamp_s": 1049.5,
+      "end_s": 1053.4,
+      "text": "low delivery but high change. إنما"
+    },
+    {
+      "timestamp_s": 1053.5,
+      "end_s": 1056.6,
+      "text": "Agile يا باشا، Agile high،"
+    },
+    {
+      "timestamp_s": 1057.0,
+      "end_s": 1060.7,
+      "text": "high. أخذ من مواصفات هذا، ومن مواصفات هذا."
+    },
+    {
+      "timestamp_s": 1061.3,
+      "end_s": 1062.1,
+      "text": "أخذ من هذا"
+    },
+    {
+      "timestamp_s": 1063.0,
+      "end_s": 1066.6,
+      "text": "high change، أنه يتقبل التغيير عادي جدًا،"
+    },
+    {
+      "timestamp_s": 1067.1,
+      "end_s": 1070.8,
+      "text": "وفي نفس الوقت high frequency of delivery."
+    },
+    {
+      "timestamp_s": 1071.3,
+      "end_s": 1074.9,
+      "text": "أي سأسلم العميل باستمرار حتى لو جزء"
+    },
+    {
+      "timestamp_s": 1075.1,
+      "end_s": 1078.3,
+      "text": "صغير لكي أرضيه. فالـ Agile"
+    },
+    {
+      "timestamp_s": 1078.7,
+      "end_s": 1082.0,
+      "text": "يرضي العميل، يرضي العميل ويجعله أيضًا"
+    },
+    {
+      "timestamp_s": 1082.9,
+      "end_s": 1086.7,
+      "text": "مبسوط. أهم شيء العميل يكون"
+    },
+    {
+      "timestamp_s": 1086.7,
+      "end_s": 1088.0,
+      "text": "طبعًا مبسوط."
+    }
+  ],
+  "language": "ar-x-autogen"
+}

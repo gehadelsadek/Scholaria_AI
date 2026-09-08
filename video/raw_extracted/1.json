@@ -1,0 +1,57 @@
+{
+  "source_name": "1",
+  "source_type": "video",
+  "pages": [
+    {
+      "timestamp_s": 0.3,
+      "end_s": 3.9,
+      "text": "بسم الله. النقطة الأولى لدينا وهي History أو"
+    },
+    {
+      "timestamp_s": 4.0,
+      "end_s": 7.9,
+      "text": "تاريخ Agile. كيف وبمن بدأ Agile؟ قديماً"
+    },
+    {
+      "timestamp_s": 8.0,
+      "end_s": 11.7,
+      "text": "قبل ظهور Agile كانت كل المشاريع تدار"
+    },
+    {
+      "timestamp_s": 11.8,
+      "end_s": 15.6,
+      "text": "بالطريقة التقليدية. ما المقصود بالتقليدية؟ المقصود بالطريقة"
+    },
+    {
+      "timestamp_s": 15.7,
+      "end_s": 19.2,
+      "text": "التنبؤية Predictive أو التقليدية Traditional"
+    },
+    {
+      "timestamp_s": 19.7,
+      "end_s": 23.0,
+      "text": "أو الشلالية Waterfall، وأحياناً يسمونها أيضاً"
+    },
+    {
+      "timestamp_s": 23.8,
+      "end_s": 27.7,
+      "text": "Linear وPlan-driven. أي أننا كنا نتبع المشروع"
+    },
+    {
+      "timestamp_s": 27.8,
+      "end_s": 30.9,
+      "text": "على Phases أو مراحل بالشكل الذي أمامك."
+    },
+    {
+      "timestamp_s": 31.5,
+      "end_s": 35.2,
+      "text": "أول خطوة نقوم بعمل Analysis أو تحليل، ننتهي من المرحلة"
+    },
+    {
+      "timestamp_s": 35.3,
+      "end_s": 36.2,
+      "text": "وننتقل إلى التصميم"
+    }
+  ],
+  "language": "ar-x-autogen"
+}
