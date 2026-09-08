@@ -15,10 +15,8 @@ Embed_upsert_qdrant.py) واحد ورا التاني يدويًا مع ملفا�
 (files_pipeline.py مثلاً) بيستخدم نفس shared/.
 
 Usage:
-    from ingestion.video.video_pipeline import ingest_video, ingest_folder
-
-    ingest_video("123456789", tenant_id="acme", course_id="agile-101")
-    ingest_folder("30332812", tenant_id="acme", course_id="agile-101")
+    python -m ingestion.video.video_pipeline <folder_id>
+    (عدّلي TENANT_ID / COURSE_ID تحت الأول قبل التشغيل)
 """
 from ingestion.video import transcription
 from ingestion.video.video_chunking import (
@@ -36,12 +34,26 @@ from ingestion.shared.qdrant_upsert import get_qdrant_client, upsert_chunks
 from ingestion.shared.schema import build_video_payload
 
 
+# =========================================================
+# ✏️ عدّلي هنا قبل كل تشغيل لعميل/كورس مختلف
+# =========================================================
+# المنصة multi-tenant، لكن كل تشغيلة للسكريبت ده بتخص عميل وكورس
+# واحد بس - فـ tenant_id/course_id ثابتين (static) هنا بدل ما يتحلّوا
+# من جدول/registry. لو محتاجة تجهّزي أكتر من عميل، غيّري القيمتين دول
+# وشغّلي السكريبت تاني لكل عميل على حدة.
+TENANT_ID = "acme"
+COURSE_ID = "agile-101"
+# =========================================================
+# End of configuration
+# =========================================================
+
+
 def ingest_video(
     video_id: str,
-    tenant_id: str,
-    course_id: str,
     video_name: str | None = None,
     video_url: str | None = None,
+    tenant_id: str = TENANT_ID,
+    course_id: str = COURSE_ID,
     client=None,
     dense_model=None,
     sparse_model=None,
@@ -51,12 +63,16 @@ def ingest_video(
     بتاخد فيديو واحد من Vimeo لحد ما يبقى مفهرس في Qdrant. بترجع عدد
     الـ chunks اللي اتعملهم upsert (0 لو معندوش ترانسكريبت).
 
+    tenant_id/course_id بياخدوا قيمتهم الافتراضية من TENANT_ID/COURSE_ID
+    فوق، لكن ممكن تتجاوزيهم صراحةً في نداء واحد لو احتجتي (مثلاً سكريبت
+    بيلف على أكتر من عميل).
+
     الموديلات والـ client اختياريين كـ parameters عشان ingest_folder()
     تحمّلهم مرة واحدة وتشاركهم بين كل الفيديوهات بدل ما كل فيديو يحمّل
     نسخته الخاصة.
     """
     if not tenant_id or not course_id:
-        raise ValueError("tenant_id و course_id إلزاميين")
+        raise ValueError("TENANT_ID و COURSE_ID لازم يكونوا متعرّفين فوق في الملف")
 
     print(f"[{video_id}] Fetching transcript...")
     raw_data = transcription.fetch_transcript(video_id, video_name)
@@ -91,11 +107,12 @@ def ingest_video(
     return n
 
 
-def ingest_folder(folder_id: str, tenant_id: str, course_id: str) -> None:
+def ingest_folder(folder_id: str, tenant_id: str = TENANT_ID, course_id: str = COURSE_ID) -> None:
     """بتاخد كل الفيديوهات في مجلد Vimeo معين وتمشيهم في نفس الـ pipeline،
+    كلهم بنفس tenant_id/course_id (الثابتين فوق ما لم تتجاوزيهم هنا)،
     مع تحميل الموديلات مرة واحدة بس وتشاركها بين كل الفيديوهات."""
     videos = transcription.get_videos_from_folder(folder_id)
-    print(f"Found {len(videos)} videos in folder {folder_id}")
+    print(f"Found {len(videos)} videos in folder {folder_id} -> tenant={tenant_id}, course={course_id}")
 
     dense_model = load_embedding_model()
     sparse_model = load_sparse_model()
@@ -107,9 +124,9 @@ def ingest_folder(folder_id: str, tenant_id: str, course_id: str) -> None:
         try:
             n = ingest_video(
                 v["id"],
+                video_name=v["name"],
                 tenant_id=tenant_id,
                 course_id=course_id,
-                video_name=v["name"],
                 client=client,
                 dense_model=dense_model,
                 sparse_model=sparse_model,
@@ -129,7 +146,8 @@ def ingest_folder(folder_id: str, tenant_id: str, course_id: str) -> None:
 if __name__ == "__main__":
     import sys
 
-    if len(sys.argv) < 4:
-        print("Usage: python -m ingestion.video.video_pipeline <folder_id> <tenant_id> <course_id>")
+    if len(sys.argv) < 2:
+        print("Usage: python -m ingestion.video.video_pipeline <folder_id>")
+        print(f"(هيشتغل بـ TENANT_ID={TENANT_ID!r}, COURSE_ID={COURSE_ID!r} المكتوبين فوق في الملف)")
     else:
-        ingest_folder(sys.argv[1], tenant_id=sys.argv[2], course_id=sys.argv[3])
+        ingest_folder(sys.argv[1])
