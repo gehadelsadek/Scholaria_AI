@@ -13,7 +13,7 @@ from collections import Counter
 
 import numpy as np
 
-from ingestion.shared.embedding import embed_documents, embed_sparse_documents
+from ingestion.shared.embedding import encode_dense
 
 CHARS_PER_TOKEN = 2.5
 
@@ -315,7 +315,7 @@ def chunk_semantic(
         return []
 
     # 1) نلاقي الحدود الدلالية
-    vectors = embed_documents([p["text"] for p in valid], batch_size=8)
+    vectors = encode_dense([p["text"] for p in valid])
     boundaries = find_boundaries(vectors, percentile, min_gap)
 
     # 2) نسمّي موضوع لكل صفحة

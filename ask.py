@@ -1,22 +1,29 @@
 """
-اختبار تفاعلي: اسأل أي سؤال وشوف الإجابة مع مراجعها.
+ask.py — واجهة تفاعلية للاختبار.
+
+أوامر:
+    ملفات / files   → البحث في الملفات بس
+    فيديو / video   → البحث في الفيديو بس
+    الكل / all      → الاتنين (الافتراضي)
+    جديد / new      → محادثة جديدة
+    خروج / exit
 """
 
-from ingestion.shared.embedding import embed_query, embed_sparse_query
-
-from ingestion.shared.qdrant_upsert import get_client
-from retrieval.search import hybrid_search
 from generation.answerer import answer, summarize_history
+from generation.citations import format_reference
+from ingestion.shared.qdrant_upsert import get_client
+from ingestion.shared.schema import SourceType
 from retrieval.reranking import rerank
+from retrieval.search import hybrid_search
 
-TENANT, COURSE = "dev-tenant", 1
+TENANT_ID = "dev-tenant"
+COURSE_ID = "1"
+
 CANDIDATES = 10
 TOP_N = 5
 KEEP_TURNS = 3
 
-# الحد الأدنى المطلق — تحته مفيش حاجة مرتبطة
 MIN_SCORE = 3
-# نسبة من أعلى درجة — بتتكيف مع كل سؤال
 RELATIVE_CUTOFF = 0.5
 
 NO_EVIDENCE = "المعلومة دي مش متوفرة."
@@ -25,9 +32,8 @@ client = get_client()
 
 history = []
 summary = None
+source_filter = None  # None = الملفات والفيديو مع بعض
 
-
-# متابعة للإجابة الأخيرة
 FOLLOWUP = [
     "وضح",
     "اشرح",
@@ -56,24 +62,21 @@ def _build_search_query(query):
     if not user_msgs:
         return query
 
-    # low = query.lower()
-
     if any(h in query.lower() for h in FOLLOWUP):
-        return f"{user_msgs[-1]} {query}"
+        return user_msgs[-1]
 
     return query
 
 
 def _filter_useful(reranked):
     """
-    بتفلتر المرشحين بعتبة نسبية مش رقم ثابت.
-    السؤال اللي إجابته واضحة بياخد عتبة أعلى، والموزّع بياخد أوسع.
+    عتبة نسبية مش رقم ثابت — السؤال اللي إجابته واضحة بياخد عتبة أعلى،
+    والموزّع بياخد أوسع.
     """
     scored = [(r, s) for r, s in reranked if s is not None]
 
-    # الـ rerank فشل — نسيب ترتيب الاسترجاع
     if not scored:
-        return [r for r, _ in reranked]
+        return [r for r, _ in reranked]  # الـ rerank فشل
 
     top = max(s for _, s in scored)
 
@@ -89,12 +92,23 @@ def ask(query):
 
     search_query = _build_search_query(query)
 
-    dense = embed_query(search_query)
-    sparse = embed_sparse_query(search_query)
-    candidates = hybrid_search(client, dense, sparse, TENANT, COURSE, top_k=CANDIDATES)
+    candidates = hybrid_search(
+        client,
+        search_query,
+        tenant_id=TENANT_ID,
+        course_id=COURSE_ID,
+        source_type=source_filter,
+        top_k=CANDIDATES,
+    )
+
+    scope = {
+        SourceType.FILE: "الملفات",
+        SourceType.VIDEO: "الفيديو",
+    }.get(source_filter, "الملفات + الفيديو")
 
     print(f"\n{'='*70}")
     print(f"❓ {query}")
+    print(f"   [{scope}]")
     print(f"{'='*70}")
 
     if not candidates:
@@ -114,12 +128,12 @@ def ask(query):
     if result["citations"]:
         print(f"\n📚 المراجع:")
         for c in result["citations"]:
-            print(f"   [{c['index']}] {c['source']} — صفحة {c['page']}")
+            icon = "🎬" if c["source_type"] == SourceType.VIDEO else "📄"
+            print(f"   [{c['index']}] {icon} {c['source']} — {c['reference']}")
 
     history.append({"role": "user", "content": query})
     history.append({"role": "assistant", "content": result["answer"]})
 
-    # الجولات اللي هتتشال بتتلخّص قبل ما تروح
     if len(history) > KEEP_TURNS * 2:
         old = history[: -(KEEP_TURNS * 2)]
         new_summary = summarize_history(old)
@@ -129,21 +143,34 @@ def ask(query):
 
 
 def reset():
-    """بتبدأ محادثة جديدة — بتمسح التاريخ والملخص."""
     global history, summary
     history.clear()
     summary = None
 
 
+def set_scope(value):
+    global source_filter
+    source_filter = value
+    label = {
+        SourceType.FILE: "الملفات بس",
+        SourceType.VIDEO: "الفيديو بس",
+    }.get(value, "الملفات + الفيديو")
+    print(f"🔎 البحث في: {label}")
+
+
 print("⏳ بيجهّز الموديلات...")
-embed_query("تجربة")
-embed_sparse_query("تجربة")
+try:
+    hybrid_search(client, "تجربة", tenant_id=TENANT_ID, course_id=COURSE_ID, top_k=1)
+except Exception:
+    print("⚠️ الـ collection لسه فاضية — شغّلي الفهرسة الأول")
 print("✅ جاهز\n")
-print("اكتب سؤالك | 'جديد' لمحادثة جديدة | 'خروج' للإنهاء")
+
+print("اكتب سؤالك | 'ملفات' | 'فيديو' | 'الكل' | 'جديد' | 'خروج'")
 
 try:
     while True:
         q = input("\n💬 سؤالك: ").strip()
+
         if not q:
             continue
         if q in ("خروج", "exit", "quit", "q"):
@@ -152,7 +179,18 @@ try:
             reset()
             print("🔄 محادثة جديدة")
             continue
+        if q in ("ملفات", "files"):
+            set_scope(SourceType.FILE)
+            continue
+        if q in ("فيديو", "video"):
+            set_scope(SourceType.VIDEO)
+            continue
+        if q in ("الكل", "all"):
+            set_scope(None)
+            continue
+
         ask(q)
+
 except (EOFError, KeyboardInterrupt):
     pass
 except Exception:

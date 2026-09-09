@@ -6,3 +6,6 @@ output/
 qdrant_data/
 data/
 hf_cache/
+models_cache/
+
+

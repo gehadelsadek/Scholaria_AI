@@ -1,125 +1,179 @@
 """
-تخزين واسترجاع من Qdrant — حسب البند 4.1 و 6.2 في الوثيقة.
+qdrant_upsert.py — التخزين في الـ collection الموحّدة.
+
+collection واحدة لكل المصادر والـ tenants. العزل بفلترة الـ payload
+وقت البحث، مش بفصل الـ collections.
+
+⚠️ نسخة واحدة بالحرف عند المسارين.
 """
+
+import os
 
 from qdrant_client import QdrantClient
 from qdrant_client.models import (
     Distance,
-    VectorParams,
-    PointStruct,
-    Filter,
     FieldCondition,
+    Filter,
     MatchValue,
-    SparseVectorParams,
+    Modifier,
+    PointStruct,
     SparseVector,
+    SparseVectorParams,
+    VectorParams,
 )
 
-COLLECTION = "scholaria_content"
-VECTOR_SIZE = 1024
+from ingestion.shared.embedding import (
+    DENSE_VECTOR_NAME,
+    SPARSE_VECTOR_NAME,
+    VECTOR_SIZE,
+)
+from ingestion.shared.schema import ChunkPayload, make_point_id
+
+COLLECTION = "rag_platform"
+
+# محلي افتراضيًا. للسيرفر المشترك: QDRANT_URL=http://host:6333
+QDRANT_PATH = os.getenv("QDRANT_PATH", "qdrant_data")
+QDRANT_URL = os.getenv("QDRANT_URL")
 
 
-def get_client(path="qdrant_data"):
+def get_client() -> QdrantClient:
     """
-    وضع محلي — تخزين على الديسك مباشرة بدون سيرفر.
-    للإنتاج: QdrantClient(url="http://localhost:6333") حسب البند 4.1.
+    اتصال بـ Qdrant.
+    ⚠️ الوضع المحلي بيقفل الملف — مينفعش عمليتين يفتحوه مع بعض.
+    للدمج بين المسارين، لازم QDRANT_URL على سيرفر مشترك.
     """
-    return QdrantClient(path=path)
+    if QDRANT_URL:
+        return QdrantClient(url=QDRANT_URL)
+    return QdrantClient(path=QDRANT_PATH)
 
 
-def ensure_collection(client, vector_size=VECTOR_SIZE):
-    """بتنشئ الـ collection بـ dense + sparse vectors."""
+def ensure_collection(client: QdrantClient, collection: str = COLLECTION) -> None:
+    """بتنشئ الـ collection لو مش موجودة."""
     existing = [c.name for c in client.get_collections().collections]
 
-    if COLLECTION not in existing:
-        client.create_collection(
-            collection_name=COLLECTION,
-            vectors_config={
-                "dense": VectorParams(size=vector_size, distance=Distance.COSINE)
-            },
-            sparse_vectors_config={"sparse": SparseVectorParams()},
-        )
-        print(f"[qdrant] اتعملت collection: {COLLECTION} (hybrid)")
+    if collection in existing:
+        return
 
-    return client
+    client.create_collection(
+        collection_name=collection,
+        vectors_config={
+            DENSE_VECTOR_NAME: VectorParams(size=VECTOR_SIZE, distance=Distance.COSINE)
+        },
+        sparse_vectors_config={
+            SPARSE_VECTOR_NAME: SparseVectorParams(modifier=Modifier.IDF)
+        },
+    )
+    print(f"[qdrant] اتعملت collection: {collection}")
 
 
-def upsert_chunks(client, records, dense_vectors, sparse_vectors):
-    """بتخزن الـ chunks بـ dense + sparse vectors."""
+def upsert_payloads(
+    client: QdrantClient,
+    payloads: list[ChunkPayload],
+    dense_vectors: list,
+    sparse_vectors: list,
+    collection: str = COLLECTION,
+) -> None:
+    """
+    بتخزن الـ chunks. الـ point id حتمي، فإعادة التشغيل بتحدّث مش بتكرّر.
+    """
     points = []
 
-    for rec, dense, sparse in zip(records, dense_vectors, sparse_vectors):
+    for payload, dense, sparse in zip(payloads, dense_vectors, sparse_vectors):
         points.append(
             PointStruct(
-                id=rec["vectorId"],
+                id=make_point_id(
+                    payload.tenant_id,
+                    payload.source_type,
+                    payload.content_id,
+                    payload.content_version,
+                    payload.chunk_index,
+                ),
                 vector={
-                    "dense": dense.tolist(),
-                    "sparse": SparseVector(
+                    DENSE_VECTOR_NAME: dense,
+                    SPARSE_VECTOR_NAME: SparseVector(
                         indices=sparse.indices.tolist(),
                         values=sparse.values.tolist(),
                     ),
                 },
-                payload={
-                    **rec["metadata"],
-                    "text": rec["rawText"],
-                    "chunkIndex": rec["chunkIndex"],
-                },
+                payload=payload.to_dict(),
             )
         )
 
-    client.upsert(collection_name=COLLECTION, points=points)
-    print(f"[qdrant] اتخزن {len(points)} chunk (dense + sparse)")
+    client.upsert(collection_name=collection, points=points)
+    print(f"[qdrant] اتخزن {len(points)} chunk")
 
 
-def delete_content(client, content_id, version=None):
-    """
-    بتحذف vectors محتوى معين.
-    البند 6.2: حذف الإصدار السابق بعد نجاح الجديد.
-    """
-    conditions = [FieldCondition(key="contentId", match=MatchValue(value=content_id))]
+# =========================================================
+#  الحذف
+# =========================================================
+
+
+def delete_content(
+    client: QdrantClient,
+    tenant_id: str,
+    content_id: int,
+    source_type: str,
+    version: int | None = None,
+    collection: str = COLLECTION,
+) -> None:
+    """بتحذف vectors محتوى معيّن — كل إصداراته أو إصدار محدد."""
+    must = [
+        FieldCondition(key="tenant_id", match=MatchValue(value=str(tenant_id))),
+        FieldCondition(key="content_id", match=MatchValue(value=content_id)),
+        FieldCondition(key="source_type", match=MatchValue(value=source_type)),
+    ]
 
     if version is not None:
-        conditions.append(
-            FieldCondition(key="contentVersion", match=MatchValue(value=version))
+        must.append(
+            FieldCondition(key="content_version", match=MatchValue(value=version))
         )
 
-    client.delete(
-        collection_name=COLLECTION,
-        points_selector=Filter(must=conditions),
-    )
-    print(f"[qdrant] اتحذف محتوى {content_id}" + (f" v{version}" if version else ""))
+    client.delete(collection_name=collection, points_selector=Filter(must=must))
+    print(f"[qdrant] اتحذف محتوى {content_id} ({source_type})")
 
 
-def delete_old_versions(client, content_id, keep_version):
+def delete_old_versions(
+    client: QdrantClient,
+    tenant_id: str,
+    content_id: int,
+    source_type: str,
+    keep_version: int,
+    collection: str = COLLECTION,
+) -> None:
     """
-    بتحذف كل إصدارات المحتوى ما عدا الإصدار الحالي.
-    البند 6.2 بند 7: حذف الإصدار السابق بعد نجاح الجديد.
+    بتحذف كل إصدارات المحتوى ما عدا الحالي.
+    البند 6.2: حذف الإصدار السابق بعد نجاح الجديد.
     """
-    from qdrant_client.models import Filter, FieldCondition, MatchValue, MatchExcept
-
     client.delete(
-        collection_name=COLLECTION,
+        collection_name=collection,
         points_selector=Filter(
             must=[
-                FieldCondition(key="contentId", match=MatchValue(value=content_id)),
+                FieldCondition(key="tenant_id", match=MatchValue(value=str(tenant_id))),
+                FieldCondition(key="content_id", match=MatchValue(value=content_id)),
+                FieldCondition(key="source_type", match=MatchValue(value=source_type)),
             ],
             must_not=[
                 FieldCondition(
-                    key="contentVersion", match=MatchValue(value=keep_version)
-                ),
+                    key="content_version", match=MatchValue(value=keep_version)
+                )
             ],
         ),
     )
-    print(f"[qdrant] اتحذفت إصدارات قديمة لمحتوى {content_id} (فضل v{keep_version})")
 
 
-def count_content(client, content_id):
-    """بتعد الـ chunks الموجودة لمحتوى معين — للتحقق."""
-    from qdrant_client.models import Filter, FieldCondition, MatchValue
-
-    result = client.count(
-        collection_name=COLLECTION,
+def count_content(
+    client: QdrantClient,
+    tenant_id: str,
+    content_id: int,
+    collection: str = COLLECTION,
+) -> int:
+    """بتعد الـ chunks الموجودة لمحتوى معيّن — للتحقق."""
+    return client.count(
+        collection_name=collection,
         count_filter=Filter(
-            must=[FieldCondition(key="contentId", match=MatchValue(value=content_id))]
+            must=[
+                FieldCondition(key="tenant_id", match=MatchValue(value=str(tenant_id))),
+                FieldCondition(key="content_id", match=MatchValue(value=content_id)),
+            ]
         ),
-    )
-    return result.count
+    ).count

@@ -8,6 +8,7 @@ import re
 
 from dotenv import load_dotenv
 from openai import OpenAI
+from generation.citations import build_citation
 
 load_dotenv()
 
@@ -188,13 +189,15 @@ Style:
 
 
 def _build_context(chunks):
-    """بتجهز المقاطع مع مراجعها."""
+    """بتجهز المقاطع مع مراجعها — صفحة للملف، توقيت للفيديو."""
+    from generation.citations import format_reference
+
     parts = []
     for i, c in enumerate(chunks, 1):
         p = c.payload
-        text = p.get("text", "").replace("\n", " ")[:1200]
+        text = p.get("raw_text", "").replace("\n", " ")[:1200]
         parts.append(
-            f"[{i}] (المصدر: {p.get('title')}, صفحة {p.get('pageNumber')})\n{text}"
+            f"[{i}] (المصدر: {p.get('source')}, {format_reference(p)})\n{text}"
         )
     return "\n\n".join(parts)
 
@@ -229,15 +232,7 @@ def _extract_citations(text, used, grounded):
     if not cited:
         return []
 
-    return [
-        {
-            "index": i,
-            "source": c.payload.get("title"),
-            "page": c.payload.get("pageNumber"),
-        }
-        for i, c in enumerate(used, 1)
-        if i in cited
-    ]
+    return [build_citation(c.payload, i) for i, c in enumerate(used, 1) if i in cited]
 
 
 def _detect_lang(text):

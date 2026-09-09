@@ -1,6 +1,6 @@
 """
 ingestion/files/file_pipeline.py
-تنسيق مسار الملفات كامل: استخراج → تنظيف → تقطيع → metadata → embedding → تخزين.
+تنسيق مسار الملفات كامل: استخراج → تنظيف → تقطيع → payload → embedding → تخزين.
 """
 
 import hashlib
@@ -15,13 +15,12 @@ from ingestion.files.registry import (
     needs_indexing,
     register,
 )
-from ingestion.shared.schema import build_metadata, validate, file_checksum
-from ingestion.shared.storage import save_chunks
-from ingestion.shared.embedding import embed_documents, embed_sparse_documents
+from ingestion.shared.schema import build_file_payload, file_checksum
+from ingestion.shared.embedding import encode_dense, encode_sparse
 from ingestion.shared.qdrant_upsert import (
     get_client,
     ensure_collection,
-    upsert_chunks,
+    upsert_payloads,
     COLLECTION,
 )
 
@@ -29,7 +28,7 @@ DATA_DIR = "data"
 
 # الإعدادات دي بتيجي من الـ Backend في النظام الحقيقي (البند 6.2)
 TENANT_ID = "dev-tenant"
-COURSE_ID = 1
+COURSE_ID = "1"  # string — موحّد مع مسار الفيديو
 START_CONTENT_ID = 1000
 
 
@@ -43,31 +42,24 @@ def _normalize_for_hash(text):
     return re.sub(r"\s+", " ", text.lower()).strip()
 
 
-def remove_duplicates(records):
+def remove_duplicates(payloads):
     """
     بتشيل الـ chunks المتطابقة عبر كل الملفات.
-    بتحفظ مواضع النسخ المكررة بدل ما ترميها — مفيد للـ citation.
+    بتشتغل على ChunkPayload objects مش dicts.
     """
-    seen = {}
+    seen = set()
     unique = []
 
-    for r in records:
-        h = hashlib.md5(_normalize_for_hash(r["text"]).encode("utf-8")).hexdigest()
+    for p in payloads:
+        h = hashlib.md5(_normalize_for_hash(p.text).encode("utf-8")).hexdigest()
 
         if h in seen:
-            meta = r.get("metadata", {})
-            seen[h].setdefault("duplicateOf", []).append(
-                {
-                    "contentId": meta.get("contentId"),
-                    "pageNumber": meta.get("pageNumber"),
-                }
-            )
             continue
 
-        seen[h] = r
-        unique.append(r)
+        seen.add(h)
+        unique.append(p)
 
-    removed = len(records) - len(unique)
+    removed = len(payloads) - len(unique)
     print(f"[dedup] اتشال {removed} chunk مكرر ({len(unique)} فاضلين)")
     return unique
 
@@ -79,8 +71,8 @@ def remove_duplicates(records):
 
 def process_pdf(path, registry, content_id):
     """
-    بتعالج ملف واحد: استخراج → تنظيف → تقطيع → metadata.
-    بترجع records جاهزة للـ embedding.
+    بتعالج ملف واحد: استخراج → تنظيف → تقطيع → payload.
+    بترجع ChunkPayload objects جاهزة للـ embedding.
     """
     name = os.path.splitext(os.path.basename(path))[0]
     checksum = file_checksum(path)
@@ -92,7 +84,7 @@ def process_pdf(path, registry, content_id):
         return [], registry
 
     print(f"\n{'='*60}")
-    print(f"📄 {name}  (contentId={content_id}, v{version})")
+    print(f"📄 {name}  (content_id={content_id}, v{version})")
     print(f"{'='*60}")
 
     pages = extract_pdf(path)
@@ -101,26 +93,21 @@ def process_pdf(path, registry, content_id):
     chunks = enrich_chunks(chunks)
 
     doc_info = {
-        "contentId": content_id,
-        "contentVersion": version,
-        "sourceType": "pdf",
+        "tenant_id": TENANT_ID,
+        "course_id": COURSE_ID,
+        "content_id": content_id,
+        "content_version": version,
         "title": name,
         "checksum": checksum,
-        "contentType": "Lecture",
-        "tenantId": TENANT_ID,
-        "courseId": COURSE_ID,
     }
 
-    records = []
-    for i, c in enumerate(chunks):
-        rec = build_metadata(c, doc_info, i)
-        validate(rec)
-        records.append(rec)
+    # build_file_payload بتعمل البناء والتحقق مع بعض
+    payloads = [build_file_payload(c, doc_info, i) for i, c in enumerate(chunks)]
 
-    print(f"chunks: {len(records)}")
-    registry = register(path, checksum, version, content_id, len(records), registry)
+    print(f"chunks: {len(payloads)}")
+    registry = register(path, checksum, version, content_id, len(payloads), registry)
 
-    return records, registry
+    return payloads, registry
 
 
 # ============================================================
@@ -130,7 +117,7 @@ def process_pdf(path, registry, content_id):
 
 def extract_all(data_dir=DATA_DIR):
     """
-    بتمشي على كل ملفات PDF وترجع الـ records المحدّثة.
+    بتمشي على كل ملفات PDF وترجع الـ payloads المحدّثة.
     الملفات اللي مااتغيرتش بتتخطى (البند 16.2).
     """
     registry = load_registry()
@@ -147,7 +134,7 @@ def extract_all(data_dir=DATA_DIR):
     used_ids = {e["contentId"] for e in registry.values()}
     next_id = max(used_ids) + 1 if used_ids else START_CONTENT_ID
 
-    all_records = []
+    all_payloads = []
     for path in files:
         entry = registry.get(os.path.basename(path))
         if entry:
@@ -157,33 +144,30 @@ def extract_all(data_dir=DATA_DIR):
             next_id += 1
 
         try:
-            recs, registry = process_pdf(path, registry, content_id=cid)
-            all_records.extend(recs)
+            payloads, registry = process_pdf(path, registry, content_id=cid)
+            all_payloads.extend(payloads)
         except Exception as e:
             print(f"❌ فشل {os.path.basename(path)}: {e}")
 
     save_registry(registry)
-    return remove_duplicates(all_records) if all_records else []
+    return remove_duplicates(all_payloads) if all_payloads else []
 
 
-def index_records(records):
+def index_payloads(payloads):
     """
-    بتعمل embedding للـ records وتخزنها في Qdrant.
+    بتعمل embedding وتخزن في الـ collection الموحّدة.
     dense للمعنى + sparse للكلمات المفتاحية (البند 6.5).
     """
-    texts = [r["text"] for r in records]
-    raw_texts = [r.get("rawText", r["text"]) for r in records]
-
     print("\n[embed] بيولّد dense vectors...")
-    dense_vectors = embed_documents(texts)
+    dense = encode_dense([p.text for p in payloads])
 
     print("[embed] بيولّد sparse vectors...")
-    sparse_vectors = embed_sparse_documents(raw_texts)
+    sparse = encode_sparse([p.raw_text for p in payloads])
 
     client = get_client()
     try:
-        ensure_collection(client, vector_size=dense_vectors.shape[1])
-        upsert_chunks(client, records, dense_vectors, sparse_vectors)
+        ensure_collection(client)
+        upsert_payloads(client, payloads, dense, sparse)
 
         info = client.get_collection(COLLECTION)
         print(f"✅ الإجمالي في الـ DB: {info.points_count} نقطة")
@@ -192,18 +176,14 @@ def index_records(records):
 
 
 def main():
-    records = extract_all()
+    payloads = extract_all()
 
-    if not records:
+    if not payloads:
         print("\n✅ كل الملفات محدّثة — مفيش شغل جديد")
         return
 
-    print(f"\n✅ {len(records)} chunk جديد/محدّث")
-
-    # نحفظ نسخة للمراجعة البشرية
-    save_chunks(records, name="all_chunks")
-
-    index_records(records)
+    print(f"\n✅ {len(payloads)} chunk جديد/محدّث")
+    index_payloads(payloads)
 
 
 if __name__ == "__main__":

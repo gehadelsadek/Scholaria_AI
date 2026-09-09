@@ -1,85 +1,104 @@
 """
-توليد الـ vectors — dense (المعنى) و sparse (الكلمات المفتاحية).
+embedding.py — توليد الـ vectors، موحّد بين كل المصادر.
 
-⚠️ الملف ده لازم يكون نسخة واحدة بالحرف عند مسار الملفات ومسار الفيديو.
+Dense:  BAAI/bge-m3   (1024-dim, cosine)
+Sparse: Qdrant/bm25   (fastembed, IDF عند الفهرسة)
+
+⚠️ نسخة واحدة بالحرف عند المسارين.
 أي اختلاف في الموديل أو الأبعاد = vectors مش قابلة للمقارنة.
 """
 
 import os
+from pathlib import Path
 
-# مسار تخزين الموديلات — C: مساحته ضيقة
-os.environ["HF_HOME"] = r"F:\hf_cache"
-FASTEMBED_CACHE = r"F:\fastembed_cache"
+# مسار تخزين الموديلات — عدّله حسب جهازك لو C: ضيق
+MODEL_CACHE = Path(os.getenv("MODEL_CACHE", "models_cache"))
+os.environ.setdefault("HF_HOME", str(MODEL_CACHE))
 
 from fastembed import SparseTextEmbedding
 from sentence_transformers import SentenceTransformer
 
-# ⚠️ متفق عليها بين المسارين: bge-m3 / 1024 بُعد / COSINE
 DENSE_MODEL = "BAAI/bge-m3"
 SPARSE_MODEL = "Qdrant/bm25"
 
-_dense = None
-_sparse = None
+DENSE_VECTOR_NAME = "dense"
+SPARSE_VECTOR_NAME = "bm25"
+
+VECTOR_SIZE = 1024
+EMBED_BATCH_SIZE = 32
+
+# الموديلات متكاشة على مستوى الـ module عشان أي pipeline في نفس الـ process
+# يشارك نفس النسخة المحمّلة بدل ما كل واحد يحمّل نسخته.
+_dense_model = None
+_sparse_model = None
 
 
-# ============================================================
-#  Dense — المعنى
-# ============================================================
+# =========================================================
+#  تحميل الموديلات
+# =========================================================
 
 
-def get_dense_model():
-    """بنحمّل الموديل مرة واحدة بس (تحميله تقيل)."""
-    global _dense
-    if _dense is None:
+def load_dense_model() -> SentenceTransformer:
+    """بيحمّل bge-m3 مرة واحدة بس ويكاشه."""
+    global _dense_model
+    if _dense_model is None:
         print(f"[embed] بيحمّل {DENSE_MODEL}...")
-        _dense = SentenceTransformer(DENSE_MODEL)
-        print(f"[embed] جاهز | أبعاد الـ vector: {_dense.get_embedding_dimension()}")
-    return _dense
+        _dense_model = SentenceTransformer(DENSE_MODEL, cache_folder=str(MODEL_CACHE))
+        print("[embed] جاهز")
+    return _dense_model
 
 
-def embed_documents(texts, batch_size=8):
-    """
-    بتحول نصوص المستندات لـ vectors.
-    bge-m3 مش محتاجة بادئات — النص بيتبعت زي ما هو.
-    """
-    return get_dense_model().encode(
-        texts,
-        batch_size=batch_size,
-        show_progress_bar=True,
-        normalize_embeddings=True,
-    )
-
-
-def embed_query(query):
-    """
-    بتحول سؤال المستخدم لـ vector.
-    bge-m3 بتستخدم نفس التمثيل للسؤال والمستند.
-    """
-    return get_dense_model().encode(query, normalize_embeddings=True)
-
-
-# ============================================================
-#  Sparse — الكلمات المفتاحية (BM25)
-# ============================================================
-
-
-def get_sparse_model():
-    global _sparse
-    if _sparse is None:
+def load_sparse_model() -> SparseTextEmbedding:
+    """بيحمّل BM25 مرة واحدة بس."""
+    global _sparse_model
+    if _sparse_model is None:
         print(f"[sparse] بيحمّل {SPARSE_MODEL}...")
-        _sparse = SparseTextEmbedding(
-            model_name=SPARSE_MODEL,
-            cache_dir=FASTEMBED_CACHE,
+        _sparse_model = SparseTextEmbedding(
+            model_name=SPARSE_MODEL, cache_dir=str(MODEL_CACHE)
         )
         print("[sparse] جاهز")
-    return _sparse
+    return _sparse_model
 
 
-def embed_sparse_documents(texts):
-    """بترجع sparse vectors للمستندات."""
-    return list(get_sparse_model().embed(texts))
+# =========================================================
+#  الفهرسة
+# =========================================================
 
 
-def embed_sparse_query(query):
-    """بترجع sparse vector للسؤال."""
-    return list(get_sparse_model().query_embed(query))[0]
+def encode_dense(texts, model=None):
+    """dense vectors وقت الفهرسة."""
+    model = model or load_dense_model()
+    vectors = model.encode(
+        texts,
+        normalize_embeddings=True,
+        batch_size=EMBED_BATCH_SIZE,
+        show_progress_bar=True,
+    )
+    return [v.tolist() for v in vectors]
+
+
+def encode_sparse(texts, model=None):
+    """
+    sparse embeddings وقت الفهرسة.
+    .embed() مش .query_embed() — BM25 بيحسب IDF وقت الفهرسة
+    وبيوزن الكلمات وقت السؤال بشكل مختلف.
+    """
+    model = model or load_sparse_model()
+    return list(model.embed(texts))
+
+
+# =========================================================
+#  البحث
+# =========================================================
+
+
+def encode_dense_query(query: str, model=None):
+    """dense vector لسؤال واحد."""
+    model = model or load_dense_model()
+    return model.encode([query], normalize_embeddings=True)[0].tolist()
+
+
+def encode_sparse_query(query: str, model=None):
+    """sparse embedding لسؤال واحد — query_embed مش embed."""
+    model = model or load_sparse_model()
+    return list(model.query_embed(query))[0]

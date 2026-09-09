@@ -1,53 +1,82 @@
 """
-البحث في الـ unified collection — البند 6.5.
-Hybrid: dense (معنى) + sparse (كلمات) مدموجين بـ RRF.
+search.py — البحث الهجين في الـ collection الموحّدة.
+
+dense (المعنى) + BM25 (الكلمات المفتاحية)، مدموجين بـ RRF.
+الفلتر بيتطبق على المسارين — العزل مضمون في الاتنين.
 """
 
-from qdrant_client.models import SparseVector, Prefetch, FusionQuery, Fusion
+from qdrant_client.models import Fusion, FusionQuery, Prefetch, SparseVector
 
+from ingestion.shared.embedding import (
+    DENSE_VECTOR_NAME,
+    SPARSE_VECTOR_NAME,
+    encode_dense_query,
+    encode_sparse_query,
+)
 from ingestion.shared.qdrant_upsert import COLLECTION
 from retrieval.filtering import build_access_filter
 
 
-def search(client, query_vector, tenant_id, course_id, top_k=20):
-    """بحث dense فقط — للمقارنة."""
-    return client.query_points(
-        collection_name=COLLECTION,
-        query=query_vector.tolist(),
-        using="dense",
-        query_filter=build_access_filter(tenant_id, course_id),
-        limit=top_k,
-    ).points
-
-
 def hybrid_search(
-    client, dense_vec, sparse_vec, tenant_id, course_id, top_k=20, prefetch_limit=50
+    client,
+    query: str,
+    tenant_id: str,
+    course_id: str | None = None,
+    source_type: str | None = None,
+    top_k: int = 10,
+    prefetch_limit: int = 50,
+    collection: str = COLLECTION,
 ):
     """
-    بحث hybrid بدمج RRF.
-    الفلتر بيتطبق على المسارين — العزل مضمون في الاتنين.
+    بحث هجين.
+
+    source_type=None    → الملفات والفيديو مع بعض (الافتراضي)
+    source_type="file"  → الملفات بس
+    source_type="video" → الفيديو بس
     """
-    access = build_access_filter(tenant_id, course_id)
+    access = build_access_filter(tenant_id, course_id, source_type)
+
+    dense = encode_dense_query(query)
+    sparse = encode_sparse_query(query)
 
     return client.query_points(
-        collection_name=COLLECTION,
+        collection_name=collection,
         prefetch=[
             Prefetch(
-                query=dense_vec.tolist(),
-                using="dense",
+                query=dense,
+                using=DENSE_VECTOR_NAME,
                 filter=access,
                 limit=prefetch_limit,
             ),
             Prefetch(
                 query=SparseVector(
-                    indices=sparse_vec.indices.tolist(),
-                    values=sparse_vec.values.tolist(),
+                    indices=sparse.indices.tolist(),
+                    values=sparse.values.tolist(),
                 ),
-                using="sparse",
+                using=SPARSE_VECTOR_NAME,
                 filter=access,
                 limit=prefetch_limit,
             ),
         ],
         query=FusionQuery(fusion=Fusion.RRF),
+        limit=top_k,
+    ).points
+
+
+def dense_search(
+    client,
+    query: str,
+    tenant_id: str,
+    course_id: str | None = None,
+    source_type: str | None = None,
+    top_k: int = 10,
+    collection: str = COLLECTION,
+):
+    """بحث dense فقط — للمقارنة مع الهجين."""
+    return client.query_points(
+        collection_name=collection,
+        query=encode_dense_query(query),
+        using=DENSE_VECTOR_NAME,
+        query_filter=build_access_filter(tenant_id, course_id, source_type),
         limit=top_k,
     ).points

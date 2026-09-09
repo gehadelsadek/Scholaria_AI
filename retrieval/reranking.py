@@ -42,7 +42,7 @@ def _build_docs_block(candidates):
     """بتجهز نص المرشحين للـ prompt."""
     lines = []
     for i, c in enumerate(candidates, 1):
-        text = c.payload.get("text", "").replace("\n", " ")[:MAX_SNIPPET]
+        text = c.payload.get("raw_text", "").replace("\n", " ")[:MAX_SNIPPET]
         lines.append(f"[{i}] {text}")
     return "\n\n".join(lines)
 
