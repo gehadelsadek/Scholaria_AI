@@ -34,16 +34,16 @@ COLLECTION = "rag_platform"
 # محلي افتراضيًا. للسيرفر المشترك: QDRANT_URL=http://host:6333
 QDRANT_PATH = os.getenv("QDRANT_PATH", "qdrant_data")
 QDRANT_URL = os.getenv("QDRANT_URL")
+QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 
 
 def get_client() -> QdrantClient:
     """
-    اتصال بـ Qdrant.
-    ⚠️ الوضع المحلي بيقفل الملف — مينفعش عمليتين يفتحوه مع بعض.
-    للدمج بين المسارين، لازم QDRANT_URL على سيرفر مشترك.
+    QDRANT_URL موجود → سحابي/سيرفر مشترك (مطلوب للدمج بين المسارين)
+    مش موجود → محلي على الديسك
     """
     if QDRANT_URL:
-        return QdrantClient(url=QDRANT_URL)
+        return QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
     return QdrantClient(path=QDRANT_PATH)
 
 

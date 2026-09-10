@@ -16,8 +16,8 @@ from ingestion.shared.schema import SourceType
 from retrieval.reranking import rerank
 from retrieval.search import hybrid_search
 
-TENANT_ID = "dev-tenant"
-COURSE_ID = "1"
+TENANT_ID = "acme"
+COURSE_ID = "agile-101"
 
 CANDIDATES = 10
 TOP_N = 5
@@ -163,7 +163,9 @@ def main():
 
     print("⏳ بيجهّز الموديلات...")
     try:
-        hybrid_search(client, "تجربة", tenant_id=TENANT_ID, course_id=COURSE_ID, top_k=1)
+        hybrid_search(
+            client, "تجربة", tenant_id=TENANT_ID, course_id=COURSE_ID, top_k=1
+        )
     except Exception:
         print("⚠️ الـ collection لسه فاضية — شغّلي الفهرسة الأول")
     print("✅ جاهز\n")
