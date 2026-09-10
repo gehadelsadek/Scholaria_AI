@@ -8,7 +8,7 @@ import os
 import re
 
 from dotenv import load_dotenv
-from openai import OpenAI
+from openai import OpenAI  # ⚠️ ده client library عام، مش حساب OpenAI — بيشتغل مع أي endpoint متوافق زي OpenRouter
 
 load_dotenv()
 
@@ -52,7 +52,6 @@ def _parse_scores(raw, n):
     بتستخرج الدرجات من رد الموديل.
     البند 5.5: يجب التحقق من الـJSON ورفضه عند عدم التطابق.
     """
-    # نشيل أي code fences أو نص زيادة
     match = re.search(r"\[.*\]", raw, re.S)
     if not match:
         raise ValueError("مفيش JSON في الرد")
@@ -80,7 +79,8 @@ def rerank(query, candidates, top_n=5, timeout=60):
         return []
 
     if len(candidates) == 1:
-        return candidates
+        # لازم نرجّع نفس شكل (candidate, score) اللي باقي الكود بيتوقعه
+        return [(candidates[0], None)]
 
     try:
         response = get_client().chat.completions.create(
@@ -96,23 +96,13 @@ def rerank(query, candidates, top_n=5, timeout=60):
             max_tokens=300,
             timeout=timeout,
         )
-        # u = response.usage
-        # cached = (
-        #     getattr(getattr(u, "prompt_tokens_details", None), "cached_tokens", 0) or 0
-        # )
-        # print(
-        #     f"[rerank] in={u.prompt_tokens} cached={cached} out={u.completion_tokens}"
-        # )
-
-        # raw = response.choices[0].message.content
         raw = response.choices[0].message.content
         scores = _parse_scores(raw, len(candidates))
 
-        missing = len(candidates) - len(scores)  # ← هنا
+        missing = len(candidates) - len(scores)
         if missing > len(candidates) * 0.3:
             print(f"[rerank] ⚠️ الموديل قيّم {len(scores)} من {len(candidates)} بس")
 
-        # نرتب حسب الدرجة (اللي مالوش درجة ياخد -1)
         ranked = sorted(
             enumerate(candidates, 1),
             key=lambda pair: scores.get(pair[0], -1),
@@ -120,13 +110,6 @@ def rerank(query, candidates, top_n=5, timeout=60):
         )
 
         return [(cand, scores.get(idx, -1)) for idx, cand in ranked[:top_n]]
-
-        # result = []
-        # for idx, cand in ranked[:top_n]:
-        #     cand.rerank_score = scores.get(idx, -1)
-        #     result.append(cand)
-
-        # return result
 
     except Exception as e:
         print(f"[rerank] ⚠️ فشل ({e}) — الترتيب الأصلي")

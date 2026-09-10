@@ -158,45 +158,52 @@ def set_scope(value):
     print(f"🔎 البحث في: {label}")
 
 
-print("⏳ بيجهّز الموديلات...")
-try:
-    hybrid_search(client, "تجربة", tenant_id=TENANT_ID, course_id=COURSE_ID, top_k=1)
-except Exception:
-    print("⚠️ الـ collection لسه فاضية — شغّلي الفهرسة الأول")
-print("✅ جاهز\n")
+def main():
+    global history, summary
 
-print("اكتب سؤالك | 'ملفات' | 'فيديو' | 'الكل' | 'جديد' | 'خروج'")
+    print("⏳ بيجهّز الموديلات...")
+    try:
+        hybrid_search(client, "تجربة", tenant_id=TENANT_ID, course_id=COURSE_ID, top_k=1)
+    except Exception:
+        print("⚠️ الـ collection لسه فاضية — شغّلي الفهرسة الأول")
+    print("✅ جاهز\n")
 
-try:
-    while True:
-        q = input("\n💬 سؤالك: ").strip()
+    print("اكتب سؤالك | 'ملفات' | 'فيديو' | 'الكل' | 'جديد' | 'خروج'")
 
-        if not q:
-            continue
-        if q in ("خروج", "exit", "quit", "q"):
-            break
-        if q in ("جديد", "new", "clear"):
-            reset()
-            print("🔄 محادثة جديدة")
-            continue
-        if q in ("ملفات", "files"):
-            set_scope(SourceType.FILE)
-            continue
-        if q in ("فيديو", "video"):
-            set_scope(SourceType.VIDEO)
-            continue
-        if q in ("الكل", "all"):
-            set_scope(None)
-            continue
+    try:
+        while True:
+            q = input("\n💬 سؤالك: ").strip()
 
-        ask(q)
+            if not q:
+                continue
+            if q in ("خروج", "exit", "quit", "q"):
+                break
+            if q in ("جديد", "new", "clear"):
+                reset()
+                print("🔄 محادثة جديدة")
+                continue
+            if q in ("ملفات", "files"):
+                set_scope(SourceType.FILE)
+                continue
+            if q in ("فيديو", "video"):
+                set_scope(SourceType.VIDEO)
+                continue
+            if q in ("الكل", "all"):
+                set_scope(None)
+                continue
 
-except (EOFError, KeyboardInterrupt):
-    pass
-except Exception:
-    import traceback
+            ask(q)
 
-    traceback.print_exc()
-finally:
-    client.close()
-    print("\n👋 انتهى")
+    except (EOFError, KeyboardInterrupt):
+        pass
+    except Exception:
+        import traceback
+
+        traceback.print_exc()
+    finally:
+        client.close()
+        print("\n👋 انتهى")
+
+
+if __name__ == "__main__":
+    main()

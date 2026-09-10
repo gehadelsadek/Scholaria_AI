@@ -9,3 +9,4 @@ hf_cache/
 models_cache/
 
 
+*.zip
