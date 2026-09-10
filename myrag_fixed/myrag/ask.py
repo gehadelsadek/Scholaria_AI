@@ -16,8 +16,8 @@ from ingestion.shared.schema import SourceType
 from retrieval.reranking import rerank
 from retrieval.search import hybrid_search
 
-TENANT_ID = "dev-tenant"
-COURSE_ID = "1"
+TENANT_ID = "acme"
+COURSE_ID = "agile-101"
 
 CANDIDATES = 10
 TOP_N = 5
@@ -158,52 +158,45 @@ def set_scope(value):
     print(f"🔎 البحث في: {label}")
 
 
-def main():
-    global history, summary
+print("⏳ بيجهّز الموديلات...")
+try:
+    hybrid_search(client, "تجربة", tenant_id=TENANT_ID, course_id=COURSE_ID, top_k=1)
+except Exception:
+    print("⚠️ الـ collection لسه فاضية — شغّلي الفهرسة الأول")
+print("✅ جاهز\n")
 
-    print("⏳ بيجهّز الموديلات...")
-    try:
-        hybrid_search(client, "تجربة", tenant_id=TENANT_ID, course_id=COURSE_ID, top_k=1)
-    except Exception:
-        print("⚠️ الـ collection لسه فاضية — شغّلي الفهرسة الأول")
-    print("✅ جاهز\n")
+print("اكتب سؤالك | 'ملفات' | 'فيديو' | 'الكل' | 'جديد' | 'خروج'")
 
-    print("اكتب سؤالك | 'ملفات' | 'فيديو' | 'الكل' | 'جديد' | 'خروج'")
+try:
+    while True:
+        q = input("\n💬 سؤالك: ").strip()
 
-    try:
-        while True:
-            q = input("\n💬 سؤالك: ").strip()
+        if not q:
+            continue
+        if q in ("خروج", "exit", "quit", "q"):
+            break
+        if q in ("جديد", "new", "clear"):
+            reset()
+            print("🔄 محادثة جديدة")
+            continue
+        if q in ("ملفات", "files"):
+            set_scope(SourceType.FILE)
+            continue
+        if q in ("فيديو", "video"):
+            set_scope(SourceType.VIDEO)
+            continue
+        if q in ("الكل", "all"):
+            set_scope(None)
+            continue
 
-            if not q:
-                continue
-            if q in ("خروج", "exit", "quit", "q"):
-                break
-            if q in ("جديد", "new", "clear"):
-                reset()
-                print("🔄 محادثة جديدة")
-                continue
-            if q in ("ملفات", "files"):
-                set_scope(SourceType.FILE)
-                continue
-            if q in ("فيديو", "video"):
-                set_scope(SourceType.VIDEO)
-                continue
-            if q in ("الكل", "all"):
-                set_scope(None)
-                continue
+        ask(q)
 
-            ask(q)
+except (EOFError, KeyboardInterrupt):
+    pass
+except Exception:
+    import traceback
 
-    except (EOFError, KeyboardInterrupt):
-        pass
-    except Exception:
-        import traceback
-
-        traceback.print_exc()
-    finally:
-        client.close()
-        print("\n👋 انتهى")
-
-
-if __name__ == "__main__":
-    main()
+    traceback.print_exc()
+finally:
+    client.close()
+    print("\n👋 انتهى")
