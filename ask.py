@@ -23,7 +23,8 @@ CANDIDATES = 10
 TOP_N = 5
 KEEP_TURNS = 3
 
-MIN_SCORE = 3
+MIN_SCORE = 4
+
 RELATIVE_CUTOFF = 0.5
 
 NO_EVIDENCE = "المعلومة دي مش متوفرة."
@@ -50,6 +51,15 @@ FOLLOWUP = [
     "clarify",
     "expand",
     "simplify",
+    "page",
+    "source",
+    "elaborate",
+    "where",
+    "فين",
+    "منين",
+    "مصدر",
+    "صفحه",
+    "صفحة",
 ]
 
 

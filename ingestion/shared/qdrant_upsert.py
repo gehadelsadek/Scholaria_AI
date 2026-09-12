@@ -8,7 +8,10 @@ collection واحدة لكل المصادر والـ tenants. العزل بفل�
 """
 
 import os
+from dotenv import load_dotenv
+from qdrant_client.models import PayloadSchemaType
 
+load_dotenv()
 from qdrant_client import QdrantClient
 from qdrant_client.models import (
     Distance,
@@ -43,7 +46,7 @@ def get_client() -> QdrantClient:
     مش موجود → محلي على الديسك
     """
     if QDRANT_URL:
-        return QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
+        return QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY, timeout=120)
     return QdrantClient(path=QDRANT_PATH)
 
 
@@ -63,6 +66,20 @@ def ensure_collection(client: QdrantClient, collection: str = COLLECTION) -> Non
             SPARSE_VECTOR_NAME: SparseVectorParams(modifier=Modifier.IDF)
         },
     )
+
+    for field, schema in [
+        ("tenant_id", PayloadSchemaType.KEYWORD),
+        ("course_id", PayloadSchemaType.KEYWORD),
+        ("source_type", PayloadSchemaType.KEYWORD),
+        ("published", PayloadSchemaType.BOOL),
+        ("content_id", PayloadSchemaType.INTEGER),
+        ("content_version", PayloadSchemaType.INTEGER),
+    ]:
+        client.create_payload_index(
+            collection_name=collection,
+            field_name=field,
+            field_schema=schema,
+        )
     print(f"[qdrant] اتعملت collection: {collection}")
 
 

@@ -27,8 +27,8 @@ from ingestion.shared.qdrant_upsert import (
 DATA_DIR = "data"
 
 # الإعدادات دي بتيجي من الـ Backend في النظام الحقيقي (البند 6.2)
-TENANT_ID = "dev-tenant"
-COURSE_ID = "1"  # string — موحّد مع مسار الفيديو
+TENANT_ID = "acme"
+COURSE_ID = "agile-101"  # string — موحّد مع مسار الفيديو
 START_CONTENT_ID = 1000
 
 
